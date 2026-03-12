@@ -29,7 +29,7 @@ export default function InfiniteGridBackground() {
   }, [mouseX, mouseY]);
 
   return (
-    <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+    <div className="fixed inset-0 pointer-events-none hidden md:block" style={{ zIndex: 0 }}>
       {/* Base grid – pure CSS, zero JS */}
       <div className="absolute inset-0 opacity-[0.07]" style={gridBg} />
       {/* Mouse-reveal grid – same CSS grid, only the mask is JS-driven */}
