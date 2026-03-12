@@ -60,14 +60,6 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
         >
-          {/* Status badge */}
-          <motion.div variants={itemVariants} className="mb-10">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-bg-secondary/80 text-text-muted text-xs font-medium tracking-wide">
-              <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
-              Freelancer · Verfügbar für neue Projekte
-            </span>
-          </motion.div>
-
           {/* Giant typewriter */}
           <motion.div variants={itemVariants} className="mb-5">
             <div className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold leading-none tracking-tighter">

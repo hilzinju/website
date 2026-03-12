@@ -38,41 +38,21 @@ export default function Contact() {
     setLoading(true);
     setSubmitError("");
 
-    try {
-      const body = new FormData();
-      body.append("access_key", WEB3FORMS_ACCESS_KEY);
-      body.append("name", `${data.get("fname") as string} ${data.get("lname") as string}`);
-      body.append("email", data.get("email") as string);
-      body.append("subject", (data.get("subject") as string) || "Neue Kontaktanfrage – julian-hilzinger.de");
-      body.append("message", data.get("message") as string);
-      body.append("from_name", "Website Kontaktformular");
+    const formData = new FormData(form);
+    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
 
-      let res: Response;
-      try {
-        res = await fetch("https://api.web3forms.com/submit", { method: "POST", body });
-      } catch (networkErr) {
-        console.error("Fetch failed:", networkErr);
-        setSubmitError("Keine Verbindung zum Server. Bitte prüfe deine Internetverbindung.");
-        return;
-      }
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData,
+    });
+    const result = await response.json();
 
-      let result: { success: boolean; message?: string };
-      try {
-        result = await res.json();
-      } catch (parseErr) {
-        console.error("JSON parse failed:", parseErr, "HTTP status:", res.status);
-        setSubmitError(`Server-Fehler (HTTP ${res.status}). Bitte versuche es erneut.`);
-        return;
-      }
-
-      if (result.success) {
-        setSubmitted(true);
-        form.reset();
-      } else {
-        setSubmitError(result.message || "Fehler beim Senden. Bitte versuche es erneut.");
-      }
-    } finally {
-      setLoading(false);
+    setLoading(false);
+    if (result.success) {
+      setSubmitted(true);
+      form.reset();
+    } else {
+      setSubmitError(result.message || "Fehler beim Senden. Bitte versuche es erneut.");
     }
   };
 
