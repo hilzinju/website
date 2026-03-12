@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Julian Hilzinger – Senior Software Architekt & KI-Stratege</title>
+  <meta name="description" content="Julian Hilzinger – Senior Software Architekt & KI-Stratege | 10+ Jahre Erfahrung | Freelancer | Java, Spring Boot, Angular, KI-Agenten, Cloud-Native" />
+  <meta property="og:title" content="Julian Hilzinger – Senior Software Architekt & KI-Stratege" />
+  <meta property="og:description" content="Spezialist für Legacy-Modularisierung und KI-Agenten-Workflows. Freelancer seit 2022." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ===================== RESET & VARIABLES ===================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary:   #0D1117;
+      --bg-secondary: #161B22;
+      --bg-card:      #1C2128;
+      --bg-card-hover:#21262D;
+      --accent:       #4A90D9;
+      --accent-light: #5BA3EC;
+      --accent-glow:  rgba(74,144,217,0.15);
+      --text-primary: #E6EDF3;
+      --text-muted:   #8B949E;
+      --text-subtle:  #6E7681;
+      --border:       #30363D;
+      --border-light: #21262D;
+      --success:      #3FB950;
+      --warning:      #D29922;
+      --radius:       12px;
+      --radius-sm:    8px;
+      --shadow:       0 8px 32px rgba(0,0,0,0.4);
+      --shadow-sm:    0 4px 16px rgba(0,0,0,0.3);
+      --transition:   0.3s ease;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: var(--accent); color: #fff; }
+
+    /* ===================== SCROLLBAR ===================== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    /* ===================== TYPOGRAPHY ===================== */
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; }
+    h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; }
+    h3 { font-size: 1.2rem; font-weight: 600; }
+    p  { color: var(--text-muted); }
+
+    a { color: var(--accent); text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--accent-light); }
+
+    /* ===================== LAYOUT ===================== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 100px 0; }
+    .section-alt { background: var(--bg-secondary); }
+
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-header h2 { margin-bottom: 12px; }
+    .section-header p { font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+
+    .section-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(74,144,217,0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===================== FADE-IN ANIMATION ===================== */
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+    .fade-in-delay-4 { transition-delay: 0.4s; }
+    .fade-in-delay-5 { transition-delay: 0.5s; }
+
+    /* ===================== NAVBAR ===================== */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: 70px;
+      display: flex; align-items: center;
+      background: rgba(13,17,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .navbar.scrolled { border-bottom-color: var(--border); background: rgba(13,17,23,0.97); }
+
+    .navbar .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 38px; width: auto; }
+
+    .nav-links { display: flex; align-items: center; gap: 6px; list-style: none; }
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 500;
+      color: var(--text-muted);
+      padding: 6px 12px; border-radius: var(--radius-sm);
+      transition: color var(--transition), background var(--transition);
+    }
+    .nav-links a:hover { color: var(--text-primary); background: var(--bg-card); }
+
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+
+    .lang-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem; font-weight: 500;
+      padding: 5px 14px; border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent; color: var(--text-muted);
+      cursor: pointer; transition: all var(--transition);
+      letter-spacing: 0.05em;
+    }
+    .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      width: 24px; height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: all var(--transition);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed;
+      top: 70px; left: 0; right: 0;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px 24px;
+      z-index: 999;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block; color: var(--text-muted);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 1rem; font-weight: 500;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--accent); }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 70px 0 0;
+      overflow: hidden;
+    }
+
+    #hero-canvas {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      opacity: 0.4;
+    }
+
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 800px;
+    }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem; color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(74,144,217,0.3);
+      padding: 6px 14px; border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .hero-tag .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--success);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero h1 { margin-bottom: 8px; }
+    .hero h1 .name { color: var(--text-primary); }
+    .hero h1 .accent { color: var(--accent); }
+
+    .hero-title-line {
+      display: block;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 500; color: var(--text-muted);
+      margin-bottom: 24px; min-height: 2em;
+    }
+    #typed-text { color: var(--accent); }
+    .cursor { animation: blink 1s infinite; color: var(--accent); }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    .hero-desc {
+      font-size: 1.1rem; color: var(--text-muted);
+      max-width: 620px; margin-bottom: 20px;
+    }
+
+    .hero-quote {
+      border-left: 3px solid var(--accent);
+      padding: 12px 20px;
+      background: var(--accent-glow);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin-bottom: 40px;
+      max-width: 580px;
+    }
+    .hero-quote p { font-style: italic; color: var(--text-primary); font-size: 0.95rem; }
+    .hero-quote small { color: var(--text-subtle); font-size: 0.8rem; }
+
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 14px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: var(--radius-sm);
+      font-size: 0.9rem; font-weight: 600;
+      transition: all var(--transition); cursor: pointer; border: none;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent-light); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(74,144,217,0.35); }
+
+    .btn-secondary {
+      background: transparent; color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .hero-scroll {
+      position: absolute; bottom: 32px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center;
+      gap: 8px; color: var(--text-subtle); font-size: 0.75rem;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ===================== ABOUT ===================== */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+    }
+
+    .about-text h2 { margin-bottom: 16px; }
+    .about-text p { margin-bottom: 16px; font-size: 1rem; line-height: 1.8; }
+
+    .about-info { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+    .about-info-row {
+      display: flex; gap: 12px; align-items: center;
+      font-size: 0.9rem;
+    }
+    .about-info-row .label { color: var(--text-subtle); min-width: 110px; font-weight: 500; }
+    .about-info-row .value { color: var(--text-primary); }
+
+    .stats-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      text-align: center;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .stat-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+    .stat-number {
+      font-size: 2.5rem; font-weight: 800;
+      color: var(--accent); line-height: 1;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 6px;
+    }
+    .stat-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+
+    /* ===================== SERVICES ===================== */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: all var(--transition);
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: var(--accent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform var(--transition);
+    }
+    .service-card:hover { border-color: rgba(74,144,217,0.4); transform: translateY(-4px); box-shadow: var(--shadow); }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      width: 48px; height: 48px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(74,144,217,0.2);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+    .service-icon svg { width: 24px; height: 24px; }
+
+    .service-card h3 { margin-bottom: 10px; color: var(--text-primary); }
+    .service-card p { font-size: 0.9rem; line-height: 1.7; }
+
+    /* ===================== SKILLS ===================== */
+    .skills-tabs {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: center; margin-bottom: 40px;
+    }
+
+    .tab-btn {
+      padding: 8px 20px; border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent; color: var(--text-muted);
+      font-size: 0.875rem; font-weight: 500;
+      cursor: pointer; transition: all var(--transition);
+    }
+    .tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    .skills-panel { display: none; }
+    .skills-panel.active { display: block; }
+
+    .skills-tags {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      padding: 32px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .skill-tag {
+      padding: 6px 14px; border-radius: 20px;
+      font-size: 0.83rem; font-weight: 500;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      transition: all var(--transition); cursor: default;
+    }
+    .skill-tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+    .skill-tag.highlight {
+      background: var(--accent-glow);
+      border-color: rgba(74,144,217,0.4);
+      color: var(--accent);
+    }
+    .skill-tag.certified {
+      background: rgba(63,185,80,0.1);
+      border-color: rgba(63,185,80,0.4);
+      color: var(--success);
+    }
+
+    /* ===================== TIMELINE ===================== */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 50%; top: 0; bottom: 0;
+      width: 2px; background: var(--border);
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid; grid-template-columns: 1fr 40px 1fr;
+      gap: 0 24px; margin-bottom: 48px;
+    }
+    .timeline-item:nth-child(even) .timeline-content { grid-column: 3; }
+    .timeline-item:nth-child(even) .timeline-spacer { grid-column: 1; grid-row: 1; }
+    .timeline-item:nth-child(odd) .timeline-content { grid-column: 1; }
+
+    .timeline-dot {
+      grid-column: 2;
+      width: 40px; height: 40px;
+      background: var(--bg-card);
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); flex-shrink: 0;
+      align-self: start; margin-top: 8px;
+      position: relative; z-index: 1;
+    }
+    .timeline-dot.active {
+      background: var(--accent); color: #fff;
+      box-shadow: 0 0 20px rgba(74,144,217,0.4);
+    }
+
+    .timeline-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      transition: border-color var(--transition);
+    }
+    .timeline-content:hover { border-color: rgba(74,144,217,0.4); }
+
+    .timeline-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem; color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .timeline-content h3 { color: var(--text-primary); margin-bottom: 4px; }
+    .timeline-company { color: var(--text-subtle); font-size: 0.9rem; margin-bottom: 10px; }
+    .timeline-content p { font-size: 0.88rem; line-height: 1.7; }
+
+    /* ===================== PROJECTS ===================== */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: all var(--transition);
+      display: flex; flex-direction: column;
+    }
+    .project-card:hover { border-color: rgba(74,144,217,0.4); transform: translateY(-4px); box-shadow: var(--shadow); }
+
+    .project-header {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; margin-bottom: 16px;
+    }
+    .project-icon {
+      width: 44px; height: 44px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(74,144,217,0.2);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); flex-shrink: 0;
+    }
+    .project-icon svg { width: 22px; height: 22px; }
+
+    .project-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem; color: var(--text-subtle);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 3px 10px; border-radius: 20px;
+    }
+    .project-period.active { color: var(--success); border-color: rgba(63,185,80,0.3); background: rgba(63,185,80,0.08); }
+
+    .project-card h3 { color: var(--text-primary); margin-bottom: 6px; font-size: 1.05rem; }
+    .project-client { color: var(--accent); font-size: 0.82rem; margin-bottom: 12px; font-weight: 500; }
+    .project-card p { font-size: 0.88rem; line-height: 1.7; flex: 1; }
+
+    .project-tags {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px;
+    }
+    .project-tag {
+      font-size: 0.72rem; padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-subtle);
+    }
+
+    /* ===================== EDUCATION ===================== */
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+
+    .edu-column h3 {
+      font-size: 1rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 24px; font-weight: 600;
+    }
+
+    .edu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      transition: border-color var(--transition);
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .edu-card:hover { border-color: rgba(74,144,217,0.4); }
+
+    .edu-icon {
+      width: 38px; height: 38px; flex-shrink: 0;
+      background: var(--accent-glow);
+      border: 1px solid rgba(74,144,217,0.2);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+    }
+    .edu-icon svg { width: 18px; height: 18px; }
+
+    .edu-info { flex: 1; min-width: 0; }
+    .edu-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem; color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .edu-title { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; line-height: 1.4; }
+    .edu-subtitle { font-size: 0.8rem; color: var(--text-subtle); }
+    .edu-grade {
+      display: inline-block; font-size: 0.75rem; font-weight: 600;
+      color: var(--success); background: rgba(63,185,80,0.1);
+      border: 1px solid rgba(63,185,80,0.3);
+      padding: 2px 8px; border-radius: 20px;
+      margin-top: 4px;
+    }
+
+    /* ===================== AWARDS ===================== */
+    .awards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+    .award-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 28px; text-align: center;
+      transition: all var(--transition);
+    }
+    .award-card:hover { border-color: rgba(210,153,34,0.5); transform: translateY(-4px); box-shadow: 0 8px 32px rgba(210,153,34,0.1); }
+
+    .award-icon {
+      font-size: 2.5rem; margin-bottom: 16px; display: block;
+    }
+    .award-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem; color: var(--warning);
+      margin-bottom: 10px;
+    }
+    .award-card h3 { color: var(--text-primary); margin-bottom: 8px; font-size: 1rem; }
+    .award-card p { font-size: 0.85rem; }
+
+    /* ===================== CONTACT ===================== */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; align-items: start; }
+
+    .contact-info h3 { font-size: 1.3rem; margin-bottom: 8px; }
+    .contact-info > p { margin-bottom: 32px; }
+
+    .contact-items { display: flex; flex-direction: column; gap: 16px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: border-color var(--transition);
+      text-decoration: none;
+    }
+    .contact-item:hover { border-color: rgba(74,144,217,0.4); }
+
+    .contact-item-icon {
+      width: 38px; height: 38px; flex-shrink: 0;
+      background: var(--accent-glow);
+      border: 1px solid rgba(74,144,217,0.2);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+    }
+    .contact-item-icon svg { width: 18px; height: 18px; }
+    .contact-item-label { font-size: 0.75rem; color: var(--text-subtle); margin-bottom: 2px; }
+    .contact-item-value { font-size: 0.9rem; font-weight: 500; color: var(--text-primary); }
+
+    .contact-form {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+    }
+    .contact-form h3 { margin-bottom: 24px; }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: 0.82rem;
+      color: var(--text-muted); font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      padding: 10px 14px;
+      transition: border-color var(--transition);
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .btn-full { width: 100%; justify-content: center; font-size: 0.95rem; padding: 13px; }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+    }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-left { color: var(--text-subtle); font-size: 0.85rem; }
+    .footer-links { display: flex; gap: 16px; }
+    .footer-links a { color: var(--text-subtle); font-size: 0.85rem; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { gap: 40px; }
+    }
+
+    @media (max-width: 768px) {
+      .section { padding: 72px 0; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .about-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .awards-grid { grid-template-columns: 1fr; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+
+      .timeline::before { left: 20px; }
+      .timeline-item { grid-template-columns: 40px 1fr; }
+      .timeline-dot { grid-column: 1; }
+      .timeline-item:nth-child(even) .timeline-content { grid-column: 2; }
+      .timeline-item:nth-child(odd) .timeline-content { grid-column: 2; }
+      .timeline-item:nth-child(even) .timeline-spacer { display: none; }
+
+      .hero-btns { flex-direction: column; align-items: flex-start; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .contact-form { padding: 24px; }
+    }
+
+    /* ===================== IMPRESSUM MODAL ===================== */
+    .modal-overlay {
+      display: none; position: fixed;
+      inset: 0; z-index: 2000;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      max-width: 580px; width: 100%;
+      max-height: 85vh; overflow-y: auto;
+      box-shadow: var(--shadow);
+    }
+    .modal-header {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-header h3 { font-size: 1.1rem; }
+    .modal-close {
+      background: none; border: none; cursor: pointer;
+      color: var(--text-muted); padding: 4px;
+      border-radius: 6px; transition: all var(--transition);
+      display: flex;
+    }
+    .modal-close:hover { color: var(--text-primary); background: var(--bg-secondary); }
+    .modal-body { padding: 28px; }
+    .modal-body h4 { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin: 20px 0 8px; }
+    .modal-body h4:first-child { margin-top: 0; }
+    .modal-body p, .modal-body address { font-size: 0.9rem; color: var(--text-muted); font-style: normal; line-height: 1.8; }
+    .modal-body a { color: var(--accent); }
+    .modal-body .impressum-divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="nav-logo">
+        <img src="logo.png" alt="JH IT Logo" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about" data-de="Über mich" data-en="About">Über mich</a></li>
+        <li><a href="#services" data-de="Leistungen" data-en="Services">Leistungen</a></li>
+        <li><a href="#skills" data-de="Skills" data-en="Skills">Skills</a></li>
+        <li><a href="#experience" data-de="Erfahrung" data-en="Experience">Erfahrung</a></li>
+        <li><a href="#projects" data-de="Projekte" data-en="Projects">Projekte</a></li>
+        <li><a href="#contact" data-de="Kontakt" data-en="Contact">Kontakt</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="lang-btn" id="lang-toggle">EN</button>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#about" data-de="Über mich" data-en="About">Über mich</a>
+    <a href="#services" data-de="Leistungen" data-en="Services">Leistungen</a>
+    <a href="#skills" data-de="Skills" data-en="Skills">Skills</a>
+    <a href="#experience" data-de="Erfahrung" data-en="Experience">Erfahrung</a>
+    <a href="#projects" data-de="Projekte" data-en="Projects">Projekte</a>
+    <a href="#contact" data-de="Kontakt" data-en="Contact">Kontakt</a>
+  </div>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="container">
+      <div class="hero-content">
+        <h1>
+          <span class="name">Julian Hilzinger</span>
+        </h1>
+        <span class="hero-title-line">
+          <span id="typed-text"></span><span class="cursor">|</span>
+        </span>
+        <p class="hero-desc" data-de="Spezialist für Legacy-Modularisierung und KI-Agenten-Workflows. Freelancer mit 10+ Jahren Erfahrung in Softwarearchitektur, Cloud-nativen Lösungen und KI-Integration." data-en="Specialist in legacy modularization and AI agent workflows. Freelancer with 10+ years of experience in software architecture, cloud-native solutions, and AI integration.">
+          Spezialist für Legacy-Modularisierung und KI-Agenten-Workflows. Freelancer mit 10+ Jahren Erfahrung in Softwarearchitektur, Cloud-nativen Lösungen und KI-Integration.
+        </p>
+        <div class="hero-quote">
+          <p data-de="„Hervorragend bei der Umsetzung komplexer Anforderungen in effiziente, skalierbare Lösungen."" data-en="&ldquo;Outstanding at translating complex requirements into efficient, scalable solutions.&rdquo;">„Hervorragend bei der Umsetzung komplexer Anforderungen in effiziente, skalierbare Lösungen."</p>
+          <small data-de="— Referenz Kunde" data-en="— Client Reference">— Referenz Kunde</small>
+        </div>
+        <div class="hero-btns">
+          <a href="#contact" class="btn btn-primary">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span data-de="Kontakt aufnehmen" data-en="Get in touch">Kontakt aufnehmen</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section class="section section-alt" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text fade-in">
+          <div class="section-tag" data-de="// über mich" data-en="// about me">// über mich</div>
+          <h2 data-de="Senior Software Architekt &amp; KI-Stratege" data-en="Senior Software Architect &amp; AI Strategist">Senior Software Architekt &amp; KI-Stratege</h2>
+          <p data-de="Mit über 10 Jahren Erfahrung in der Softwareentwicklung und -architektur bin ich spezialisiert auf die Modernisierung komplexer Legacy-Systeme, den Aufbau cloud-nativer Microservice-Architekturen und die strategische Integration von KI-Agenten in bestehende Workflows." data-en="With over 10 years of experience in software development and architecture, I specialize in modernizing complex legacy systems, building cloud-native microservice architectures, and strategically integrating AI agents into existing workflows.">
+            Mit über 10 Jahren Erfahrung in der Softwareentwicklung und -architektur bin ich spezialisiert auf die Modernisierung komplexer Legacy-Systeme, den Aufbau cloud-nativer Microservice-Architekturen und die strategische Integration von KI-Agenten in bestehende Workflows.
+          </p>
+          <p data-de="Als Freelancer seit 2022 unterstütze ich Unternehmen dabei, technische Exzellenz mit strategischem Denken zu verbinden – von der initialen Architekturkonzeption bis zur produktiven Umsetzung inkl. CI/CD, Mentoring und technischer Leitung." data-en="As a freelancer since 2022, I help companies connect technical excellence with strategic thinking – from initial architecture design to production deployment including CI/CD, mentoring, and technical leadership.">
+            Als Freelancer seit 2022 unterstütze ich Unternehmen dabei, technische Exzellenz mit strategischem Denken zu verbinden – von der initialen Architekturkonzeption bis zur produktiven Umsetzung inkl. CI/CD, Mentoring und technischer Leitung.
+          </p>
+          <div class="about-info">
+            <div class="about-info-row">
+              <span class="label" data-de="Standort" data-en="Location">Standort</span>
+              <span class="value">Fridingen a.d. Donau, Baden-Württemberg</span>
+            </div>
+            <div class="about-info-row">
+              <span class="label" data-de="Sprachen" data-en="Languages">Sprachen</span>
+              <span class="value" data-de="Deutsch (Muttersprache), Englisch" data-en="German (native), English">Deutsch (Muttersprache), Englisch</span>
+            </div>
+            <div class="about-info-row">
+              <span class="label" data-de="Status" data-en="Status">Status</span>
+              <span class="value" style="color: var(--success); font-weight:600;" data-de="Freelancer (seit 01/2022)" data-en="Freelancer (since 01/2022)">Freelancer (seit 01/2022)</span>
+            </div>
+            <div class="about-info-row">
+              <span class="label">LinkedIn</span>
+              <span class="value"><a href="https://www.linkedin.com/in/julian-hilzinger/" target="_blank" rel="noopener">linkedin.com/in/julian-hilzinger</a></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-grid fade-in fade-in-delay-2">
+          <div class="stat-card">
+            <div class="stat-number" data-count="10">0</div>
+            <div class="stat-label" data-de="+ Jahre Erfahrung" data-en="+ Years Experience">+ Jahre Erfahrung</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-count="3">0</div>
+            <div class="stat-label" data-de="Auszeichnungen" data-en="Awards">Auszeichnungen</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-count="6">0</div>
+            <div class="stat-label" data-de="Fachgebiete" data-en="Expertise Areas">Fachgebiete</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-count="20">0</div>
+            <div class="stat-label" data-de="+ Zertifikate" data-en="+ Certificates">+ Zertifikate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICES ===================== -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-tag" data-de="// leistungen" data-en="// services">// leistungen</div>
+        <h2 data-de="Meine Dienstleistungen" data-en="My Services">Meine Dienstleistungen</h2>
+        <p data-de="Von der Architekturkonzeption bis zur KI-Integration – maßgeschneiderte Lösungen für Ihr Unternehmen." data-en="From architecture design to AI integration – tailored solutions for your business.">Von der Architekturkonzeption bis zur KI-Integration – maßgeschneiderte Lösungen für Ihr Unternehmen.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card fade-in fade-in-delay-1">
+          <div class="service-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          </div>
+          <h3 data-de="Software-Architektur &amp; Engineering" data-en="Software Architecture &amp; Engineering">Software-Architektur &amp; Engineering</h3>
+          <p data-de="Konzeption skalierbarer Backend-Systeme, Microservices und verteilter Softwarearchitekturen. Clean Code, Datenmodellierung und wartbare Systemdesigns." data-en="Design of scalable backend systems, microservices, and distributed software architectures. Clean code, data modeling, and maintainable system designs.">Konzeption skalierbarer Backend-Systeme, Microservices und verteilter Softwarearchitekturen. Clean Code, Datenmodellierung und wartbare Systemdesigns.</p>
+        </div>
+        <div class="service-card fade-in fade-in-delay-2">
+          <div class="service-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 data-de="KI-Transformation &amp; Innovation" data-en="AI Transformation &amp; Innovation">KI-Transformation &amp; Innovation</h3>
+          <p data-de="Aufbau und Integration von KI-Agenten und Agentic Workflows (MCP, N8N), LLM-Integration, RAG-Architekturen, Machine Learning und angewandte KI-Forschung." data-en="Building and integrating AI agents and agentic workflows (MCP, N8N), LLM integration, RAG architectures, machine learning, and applied AI research.">Aufbau und Integration von KI-Agenten und Agentic Workflows (MCP, N8N), LLM-Integration, RAG-Architekturen, Machine Learning und angewandte KI-Forschung.</p>
+        </div>
+        <div class="service-card fade-in fade-in-delay-3">
+          <div class="service-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+          </div>
+          <h3 data-de="Full-Stack Solutions" data-en="Full-Stack Solutions">Full-Stack Solutions</h3>
+          <p data-de="End-to-End Entwicklung von Webanwendungen und mobilen Apps (iOS & Android). Plattformübergreifendes UI/UX Design mit modernen Frameworks wie Angular 17+." data-en="End-to-end development of web applications and mobile apps (iOS & Android). Cross-platform UI/UX design with modern frameworks like Angular 17+.">End-to-End Entwicklung von Webanwendungen und mobilen Apps (iOS & Android). Plattformübergreifendes UI/UX Design mit modernen Frameworks wie Angular 17+.</p>
+        </div>
+        <div class="service-card fade-in fade-in-delay-1">
+          <div class="service-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3 data-de="Digitale Strategie &amp; Consulting" data-en="Digital Strategy &amp; Consulting">Digitale Strategie &amp; Consulting</h3>
+          <p data-de="Strategische Beratung zur digitalen Transformation, Konzeption innovativer Geschäftsmodelle, Rapid Prototyping und technische Due-Diligence." data-en="Strategic consulting for digital transformation, design of innovative business models, rapid prototyping, and technical due diligence.">Strategische Beratung zur digitalen Transformation, Konzeption innovativer Geschäftsmodelle, Rapid Prototyping und technische Due-Diligence.</p>
+        </div>
+        <div class="service-card fade-in fade-in-delay-2">
+          <div class="service-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          </div>
+          <h3 data-de="Immersive Technologien" data-en="Immersive Technologies">Immersive Technologien</h3>
+          <p data-de="Entwicklung von Augmented Reality (Microsoft HoloLens) und Virtual Reality Anwendungen für Schulung, Produktpräsentation, Fernwartung und Kundenpräsentation." data-en="Development of Augmented Reality (Microsoft HoloLens) and Virtual Reality applications for training, product presentation, remote maintenance, and client demos.">Entwicklung von Augmented Reality (Microsoft HoloLens) und Virtual Reality Anwendungen für Schulung, Produktpräsentation, Fernwartung und Kundenpräsentation.</p>
+        </div>
+        <div class="service-card fade-in fade-in-delay-3">
+          <div class="service-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h3 data-de="Agile Methoden &amp; Tech Lead" data-en="Agile Methods &amp; Tech Lead">Agile Methoden &amp; Tech Lead</h3>
+          <p data-de="Professionelles Projektmanagement nach Scrum, technische Projektleitung, Mentoring von Entwicklerteams sowie Code-Reviews und Architektur-Workshops." data-en="Professional project management with Scrum, technical project leadership, developer team mentoring, code reviews, and architecture workshops.">Professionelles Projektmanagement nach Scrum, technische Projektleitung, Mentoring von Entwicklerteams sowie Code-Reviews und Architektur-Workshops.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SKILLS ===================== -->
+  <section class="section section-alt" id="skills">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-tag" data-de="// technologien" data-en="// technologies">// technologien</div>
+        <h2 data-de="Tech Stack &amp; Kompetenzen" data-en="Tech Stack &amp; Expertise">Tech Stack &amp; Kompetenzen</h2>
+        <p data-de="Ein breites Spektrum moderner Technologien – von Backend-Engineering bis KI-Entwicklung." data-en="A broad spectrum of modern technologies – from backend engineering to AI development.">Ein breites Spektrum moderner Technologien – von Backend-Engineering bis KI-Entwicklung.</p>
+      </div>
+      <div class="skills-tabs fade-in">
+        <button class="tab-btn active" data-tab="engineering" data-de="Software Engineering" data-en="Software Engineering">Software Engineering</button>
+        <button class="tab-btn" data-tab="architecture" data-de="Architektur &amp; Cloud" data-en="Architecture &amp; Cloud">Architektur &amp; Cloud</button>
+        <button class="tab-btn" data-tab="ai" data-de="KI &amp; AI Engineering" data-en="AI &amp; AI Engineering">KI &amp; AI Engineering</button>
+        <button class="tab-btn" data-tab="devops" data-de="DevOps &amp; QA" data-en="DevOps &amp; QA">DevOps &amp; QA</button>
+      </div>
+      <div id="tab-engineering" class="skills-panel active fade-in">
+        <div class="skills-tags">
+          <span class="skill-tag highlight">Java 21/25</span>
+          <span class="skill-tag highlight">Spring Boot 3</span>
+          <span class="skill-tag">JPA / Hibernate</span>
+          <span class="skill-tag">Tomcat / Wildfly</span>
+          <span class="skill-tag highlight">Python</span>
+          <span class="skill-tag">Django</span>
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag highlight">TypeScript</span>
+          <span class="skill-tag highlight">Angular 17+</span>
+          <span class="skill-tag">Playwright</span>
+          <span class="skill-tag">Swift (iOS)</span>
+          <span class="skill-tag">R</span>
+          <span class="skill-tag">C# / Unity</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">HTML / CSS</span>
+          <span class="skill-tag">jQuery</span>
+          <span class="skill-tag">Android</span>
+          <span class="skill-tag">NodeJS</span>
+          <span class="skill-tag">three.js</span>
+          <span class="skill-tag">OpenCV</span>
+        </div>
+      </div>
+      <div id="tab-architecture" class="skills-panel fade-in">
+        <div class="skills-tags">
+          <span class="skill-tag highlight">Microservices</span>
+          <span class="skill-tag highlight">Event-Driven Architecture</span>
+          <span class="skill-tag">Domain-Driven Design</span>
+          <span class="skill-tag highlight">Cloud-native</span>
+          <span class="skill-tag highlight">AWS</span>
+          <span class="skill-tag highlight">Microsoft Azure</span>
+          <span class="skill-tag">API-First (REST/OpenAPI)</span>
+          <span class="skill-tag highlight">PostgreSQL / SQL</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag highlight">Apache Kafka</span>
+          <span class="skill-tag">RabbitMQ</span>
+          <span class="skill-tag highlight">MCP (Model Context Protocol)</span>
+          <span class="skill-tag">AsyncAPI</span>
+          <span class="skill-tag">MQTT</span>
+          <span class="skill-tag">OPC UA</span>
+          <span class="skill-tag">Datenmodellierung (OOP)</span>
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">Clean Architecture</span>
+        </div>
+      </div>
+      <div id="tab-ai" class="skills-panel fade-in">
+        <div class="skills-tags">
+          <span class="skill-tag certified">Claude Code (Anthropic Certified)</span>
+          <span class="skill-tag highlight">LLM-Integration</span>
+          <span class="skill-tag highlight">RAG-Architekturen</span>
+          <span class="skill-tag highlight">KI-Agenten &amp; Agentic Workflows</span>
+          <span class="skill-tag highlight">MCP Server &amp; Agents</span>
+          <span class="skill-tag highlight">N8N</span>
+          <span class="skill-tag">Prompt Engineering</span>
+          <span class="skill-tag">Machine Learning</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">Keras</span>
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">MLOps</span>
+          <span class="skill-tag">Computer Vision</span>
+          <span class="skill-tag">Data Mining</span>
+          <span class="skill-tag">Predictive Maintenance</span>
+          <span class="skill-tag">KI-Compliance (EU AI Act)</span>
+          <span class="skill-tag">Azure AI / Cognitive Services</span>
+          <span class="skill-tag">Jupyter Notebooks</span>
+        </div>
+      </div>
+      <div id="tab-devops" class="skills-panel fade-in">
+        <div class="skills-tags">
+          <span class="skill-tag highlight">Docker</span>
+          <span class="skill-tag highlight">Kubernetes</span>
+          <span class="skill-tag highlight">GitLab CI/CD</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">Jenkins</span>
+          <span class="skill-tag">Maven</span>
+          <span class="skill-tag">Gradle</span>
+          <span class="skill-tag">Nexus</span>
+          <span class="skill-tag">SonarQube</span>
+          <span class="skill-tag">Selenium</span>
+          <span class="skill-tag">Testcontainers</span>
+          <span class="skill-tag">Infrastructure as Code</span>
+          <span class="skill-tag">Scrum</span>
+          <span class="skill-tag">Agiles Projektmanagement</span>
+          <span class="skill-tag">ECharts / Highcharts</span>
+          <span class="skill-tag">OBS Studio</span>
+          <span class="skill-tag">Raspberry Pi</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EXPERIENCE ===================== -->
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-tag" data-de="// karriere" data-en="// career">// karriere</div>
+        <h2 data-de="Beruflicher Werdegang" data-en="Professional Experience">Beruflicher Werdegang</h2>
+        <p data-de="Von der Hochschule bis zum Senior Freelancer – ein Weg geprägt von Innovation und technischem Wachstum." data-en="From university to senior freelancer – a path shaped by innovation and technical growth.">Von der Hochschule bis zum Senior Freelancer – ein Weg geprägt von Innovation und technischem Wachstum.</p>
+      </div>
+      <div class="timeline">
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-content">
+            <div class="timeline-period">01/2022 – <span data-de="heute" data-en="present">heute</span></div>
+            <h3 data-de="Senior Software Architekt &amp; AI Engineer" data-en="Senior Software Architect &amp; AI Engineer">Senior Software Architekt &amp; AI Engineer</h3>
+            <div class="timeline-company" data-de="Freelancer | Selbstständig" data-en="Freelancer | Self-employed">Freelancer | Selbstständig</div>
+            <p data-de="Software-Architektur & AI-Engineering, Cloud-Native Solutions, Technical Lead, Digitale Transformationsstrategie, Industrie 4.0 & Rapid Prototyping für nationale und internationale Auftraggeber aus Industrie und öffentlichem Sektor." data-en="Software architecture & AI engineering, cloud-native solutions, technical leadership, digital transformation strategy, Industry 4.0 & rapid prototyping for national and international clients across industry and the public sector.">Software-Architektur & AI-Engineering, Cloud-Native Solutions, Technical Lead, Digitale Transformationsstrategie, Industrie 4.0 & Rapid Prototyping für nationale und internationale Auftraggeber aus Industrie und öffentlichem Sektor.</p>
+          </div>
+          <div class="timeline-dot active">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in fade-in-delay-1">
+          <div class="timeline-dot">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-period">10/2021 – 10/2022</div>
+            <h3 data-de="Lehrbeauftragter" data-en="Lecturer">Lehrbeauftragter</h3>
+            <div class="timeline-company">Hochschule Albstadt-Sigmaringen</div>
+            <p data-de='Modul "Mobile Systeme und Cloud" – Lehre zu iOS, Android, Azure Cloud, Digitalisierung, Softwarearchitektur und Mobile Systeme.' data-en='Module "Mobile Systems and Cloud" – teaching iOS, Android, Azure Cloud, digitalization, software architecture, and mobile systems.'>Modul "Mobile Systeme und Cloud" – Lehre zu iOS, Android, Azure Cloud, Digitalisierung, Softwarearchitektur und Mobile Systeme.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in fade-in-delay-2">
+          <div class="timeline-content">
+            <div class="timeline-period">07/2018 – 11/2021</div>
+            <h3 data-de="Head of IT Innovations" data-en="Head of IT Innovations">Head of IT Innovations</h3>
+            <div class="timeline-company">Gühring KG</div>
+            <p data-de="App-Entwicklung (Apple, Android, Web), Full Stack, AR/VR (HoloLens), Machine Learning, Prototyping neuer IT-Technologien, Erarbeitung innovativer Geschäftsmodelle, Projektleitung, IT-Messeauftritt (EMO, AMB, METAV)." data-en="App development (Apple, Android, Web), full stack, AR/VR (HoloLens), machine learning, prototyping new IT technologies, developing innovative business models, project management, IT trade fair appearances (EMO, AMB, METAV).">App-Entwicklung (Apple, Android, Web), Full Stack, AR/VR (HoloLens), Machine Learning, Prototyping neuer IT-Technologien, Erarbeitung innovativer Geschäftsmodelle, Projektleitung, IT-Messeauftritt (EMO, AMB, METAV).</p>
+          </div>
+          <div class="timeline-dot">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in fade-in-delay-3">
+          <div class="timeline-dot">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-period">08/2016 – 06/2018</div>
+            <h3 data-de="Software Developer &amp; Architect" data-en="Software Developer &amp; Architect">Software Developer &amp; Architect</h3>
+            <div class="timeline-company">Gühring KG</div>
+            <p data-de="App-Entwicklung (Apple, Android, Web), Full Stack, AR/VR, Cognitive Services, Künstliche Intelligenz. Technische Projektleitung für ein Großprojekt (> 800 Manntage)." data-en="App development (Apple, Android, Web), full stack, AR/VR, cognitive services, artificial intelligence. Technical project lead for a large-scale project (> 800 man-days).">App-Entwicklung (Apple, Android, Web), Full Stack, AR/VR, Cognitive Services, Künstliche Intelligenz. Technische Projektleitung für ein Großprojekt (> 800 Manntage).</p>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in fade-in-delay-4">
+          <div class="timeline-content">
+            <div class="timeline-period">06/2015 – 02/2016</div>
+            <h3 data-de="Wissenschaftlicher Mitarbeiter" data-en="Research Associate">Wissenschaftlicher Mitarbeiter</h3>
+            <div class="timeline-company">Hochschule Albstadt-Sigmaringen</div>
+            <p data-de="Entwicklung eines Editors für Ontologien basierend auf der Programmiersprache Java." data-en="Development of an ontology editor based on the Java programming language.">Entwicklung eines Editors für Ontologien basierend auf der Programmiersprache Java.</p>
+          </div>
+          <div class="timeline-dot">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROJECTS ===================== -->
+  <section class="section section-alt" id="projects">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-tag" data-de="// projekte" data-en="// projects">// projekte</div>
+        <h2 data-de="Ausgewählte Projekte" data-en="Selected Projects">Ausgewählte Projekte</h2>
+        <p data-de="Ein Auszug aus abgeschlossenen und laufenden Freelance-Projekten." data-en="A selection of completed and ongoing freelance projects.">Ein Auszug aus abgeschlossenen und laufenden Freelance-Projekten.</p>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card fade-in fade-in-delay-1">
+          <div class="project-header">
+            <div class="project-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+            </div>
+            <span class="project-period active" data-de="03/2023 – heute" data-en="03/2023 – present">03/2023 – heute</span>
+          </div>
+          <h3 data-de="Herdenmanagement-Plattform" data-en="Herd Management Platform">Herdenmanagement-Plattform</h3>
+          <div class="project-client" data-de="Agrar-Tech Unternehmen" data-en="AgriTech Company">Agrar-Tech Unternehmen</div>
+          <p data-de="Modularisierung einer bestehenden Monolith-Architektur in eigenständige, containerisierte Microservices (Java 21/25, Spring Boot 3). Implementierung von MCP Server & Agents zur Prozessautomatisierung, CI/CD-Pipelines, Angular 17+ Frontend-Weiterentwicklung." data-en="Modularization of an existing monolithic architecture into independent, containerized microservices (Java 21/25, Spring Boot 3). Implementation of MCP server & agents for process automation, CI/CD pipelines, Angular 17+ frontend development.">Modularisierung einer bestehenden Monolith-Architektur in eigenständige, containerisierte Microservices (Java 21/25, Spring Boot 3). Implementierung von MCP Server & Agents zur Prozessautomatisierung, CI/CD-Pipelines, Angular 17+ Frontend-Weiterentwicklung.</p>
+          <div class="project-tags">
+            <span class="project-tag">Java 21/25</span>
+            <span class="project-tag">Spring Boot 3</span>
+            <span class="project-tag">Angular 17+</span>
+            <span class="project-tag">Docker</span>
+            <span class="project-tag">Kubernetes</span>
+            <span class="project-tag">MCP</span>
+            <span class="project-tag">RabbitMQ</span>
+            <span class="project-tag">Azure</span>
+          </div>
+        </div>
+        <div class="project-card fade-in fade-in-delay-2">
+          <div class="project-header">
+            <div class="project-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <span class="project-period">02/2022 – 12/2022</span>
+          </div>
+          <h3 data-de="Digitale Fördergelder-Plattform" data-en="Digital Funding Platform">Digitale Fördergelder-Plattform</h3>
+          <div class="project-client" data-de="Öffentlicher Auftraggeber" data-en="Public Sector Client">Öffentlicher Auftraggeber</div>
+          <p data-de="Digitale Plattform zur Pflege und Analyse bundesweiter Fördergelder. Microservices-Architektur mit Webanwendung, Django Admin-Backend, Spring Boot Komponenten und MySQL-Datenbank. Projektleitung und Softwarearchitektur." data-en="Digital platform for managing and analyzing nationwide funding. Microservices architecture with web application, Django admin backend, Spring Boot components, and MySQL database. Project management and software architecture.">Digitale Plattform zur Pflege und Analyse bundesweiter Fördergelder. Microservices-Architektur mit Webanwendung, Django Admin-Backend, Spring Boot Komponenten und MySQL-Datenbank. Projektleitung und Softwarearchitektur.</p>
+          <div class="project-tags">
+            <span class="project-tag">Microservices</span>
+            <span class="project-tag">Spring Boot</span>
+            <span class="project-tag">Angular</span>
+            <span class="project-tag">Django</span>
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Docker</span>
+            <span class="project-tag">Linux</span>
+          </div>
+        </div>
+        <div class="project-card fade-in fade-in-delay-3">
+          <div class="project-header">
+            <div class="project-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <span class="project-period">2018</span>
+          </div>
+          <h3 data-de="FC Bayern Hackdays – Telekom Challenge" data-en="FC Bayern Hackdays – Telekom Challenge">FC Bayern Hackdays – Telekom Challenge</h3>
+          <div class="project-client" data-de="1. Platz | 1.300+ Bewerber" data-en="1st Place | 1,300+ Applicants">1. Platz | 1.300+ Bewerber</div>
+          <p data-de="Prototyp-Entwicklung einer AR-Applikation für die Microsoft HoloLens zur Erweiterung des Fußballerlebnisses im und um das TV-Gerät. Teamleitung und Entwicklung innerhalb von 48 Stunden." data-en="Prototype development of an AR application for Microsoft HoloLens to enhance the football experience around the TV. Team leadership and development within 48 hours.">Prototyp-Entwicklung einer AR-Applikation für die Microsoft HoloLens zur Erweiterung des Fußballerlebnisses im und um das TV-Gerät. Teamleitung und Entwicklung innerhalb von 48 Stunden.</p>
+          <div class="project-tags">
+            <span class="project-tag">Microsoft HoloLens</span>
+            <span class="project-tag">C# / Unity</span>
+            <span class="project-tag">Java</span>
+            <span class="project-tag">Spring Boot</span>
+            <span class="project-tag">AR</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EDUCATION ===================== -->
+  <section class="section" id="education">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-tag" data-de="// ausbildung" data-en="// education">// ausbildung</div>
+        <h2 data-de="Ausbildung &amp; Zertifikate" data-en="Education &amp; Certifications">Ausbildung &amp; Zertifikate</h2>
+        <p data-de="Solides akademisches Fundament ergänzt durch kontinuierliche Weiterbildung und internationale Zertifizierungen." data-en="A solid academic foundation complemented by continuous education and international certifications.">Solides akademisches Fundament ergänzt durch kontinuierliche Weiterbildung und internationale Zertifizierungen.</p>
+      </div>
+      <div class="edu-grid fade-in">
+        <div class="edu-column">
+          <h3 data-de="Hochschule &amp; Weiterbildung" data-en="Degrees &amp; Education">Hochschule &amp; Weiterbildung</h3>
+          <div class="edu-card">
+            <div class="edu-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+            <div class="edu-info">
+              <div class="edu-year">04/2021 – 05/2022</div>
+              <div class="edu-title">ThePowerMBA</div>
+              <div class="edu-subtitle">Business Strategy, Entrepreneurship, Marketing, Innovation &amp; Digital Transformation</div>
+            </div>
+          </div>
+          <div class="edu-card">
+            <div class="edu-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+            <div class="edu-info">
+              <div class="edu-year">03/2015 – 09/2016</div>
+              <div class="edu-title">M.Sc. Business Analytics</div>
+              <div class="edu-subtitle">Hochschule Albstadt-Sigmaringen</div>
+            </div>
+          </div>
+          <div class="edu-card">
+            <div class="edu-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+            <div class="edu-info">
+              <div class="edu-year">09/2011 – 03/2015</div>
+              <div class="edu-title">B.Sc. Wirtschaftsinformatik</div>
+              <div class="edu-subtitle">Hochschule Albstadt-Sigmaringen</div>
+            </div>
+          </div>
+          <div class="edu-card">
+            <div class="edu-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+            <div class="edu-info">
+              <div class="edu-year">Weiterbildung</div>
+              <div class="edu-title">Cambridge Judge Business School</div>
+              <div class="edu-subtitle">Digital Disruption: Digital Transformation Strategies</div>
+            </div>
+          </div>
+          <div class="edu-card">
+            <div class="edu-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+            <div class="edu-info">
+              <div class="edu-year">Weiterbildung</div>
+              <div class="edu-title">UC Berkeley – School of Business</div>
+              <div class="edu-subtitle">Data Strategy: Leveraging Data as a Competitive Advantage</div>
+            </div>
+          </div>
+          <div class="edu-card">
+            <div class="edu-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+            <div class="edu-info">
+              <div class="edu-year">Weiterbildung</div>
+              <div class="edu-title">acatech</div>
+              <div class="edu-subtitle">Technologie, Strategie und Leadership</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="edu-column">
+          <h3 data-de="Zertifizierungen" data-en="Certifications">Zertifizierungen</h3>
+          <div class="edu-card">
+            <div class="edu-icon" style="background:rgba(63,185,80,0.1);border-color:rgba(63,185,80,0.3);color:var(--success)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+            <div class="edu-info">
+              <div class="edu-year" style="color:var(--success)">Anthropic Certified</div>
+              <div class="edu-title">Claude Code in Action</div>
+              <div class="edu-subtitle">Model Context Protocol: Advanced Topics · Building with the Claude API</div>
+            </div>
+          </div>
+          <div class="edu-card">
+            <div class="edu-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+            <div class="edu-info">
+              <div class="edu-year">Microsoft Certified</div>
+              <div class="edu-title">Azure Fundamentals</div>
+              <div class="edu-subtitle">Azure AI Fundamentals · Azure Data Fundamentals</div>
+            </div>
+          </div>
+          <div class="edu-card">
+            <div class="edu-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+            <div class="edu-info">
+              <div class="edu-year">Scrum.org</div>
+              <div class="edu-title">Professional Scrum Master</div>
+              <div class="edu-subtitle">Certificate of Completion</div>
+            </div>
+          </div>
+          <div class="edu-card">
+            <div class="edu-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+            <div class="edu-info">
+              <div class="edu-year">AI Training Institute</div>
+              <div class="edu-title">KI Kompetenz Schulung</div>
+              <div class="edu-subtitle">EU AI ACT – Compliance &amp; Anwendung</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AWARDS ===================== -->
+  <section class="section section-alt" id="awards">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-tag" data-de="// auszeichnungen" data-en="// awards">// auszeichnungen</div>
+        <h2 data-de="Auszeichnungen" data-en="Awards">Auszeichnungen</h2>
+        <p data-de="Anerkennungen für herausragende Leistungen in Wissenschaft, Innovation und Technologie." data-en="Recognition for outstanding achievements in academia, innovation, and technology.">Anerkennungen für herausragende Leistungen in Wissenschaft, Innovation und Technologie.</p>
+      </div>
+      <div class="awards-grid">
+        <div class="award-card fade-in fade-in-delay-1">
+          <span class="award-icon">🏆</span>
+          <div class="award-year">2016</div>
+          <h3 data-de="Philipp-Matthäus-Hahn Preis" data-en="Philipp-Matthäus-Hahn Award">Philipp-Matthäus-Hahn Preis</h3>
+          <p data-de="Bester Absolvent des M.Sc. Business Analytics, verliehen von der Philipp-Matthäus-Hahn-Stiftung." data-en="Best graduate of the M.Sc. Business Analytics program, awarded by the Philipp-Matthäus-Hahn Foundation.">Bester Absolvent des M.Sc. Business Analytics, verliehen von der Philipp-Matthäus-Hahn-Stiftung.</p>
+        </div>
+        <div class="award-card fade-in fade-in-delay-2">
+          <span class="award-icon">🥇</span>
+          <div class="award-year">2018</div>
+          <h3 data-de="1. Platz FC Bayern Hackdays" data-en="1st Place FC Bayern Hackdays">1. Platz FC Bayern Hackdays</h3>
+          <p data-de="Gewinner der Telekom Challenge mit AR/VR-Projekt. Programmierwettbewerb mit mehr als 1.300 Bewerbern." data-en="Winner of the Telekom Challenge with AR/VR project. Programming competition with more than 1,300 applicants.">Gewinner der Telekom Challenge mit AR/VR-Projekt. Programmierwettbewerb mit mehr als 1.300 Bewerbern.</p>
+        </div>
+        <div class="award-card fade-in fade-in-delay-3">
+          <span class="award-icon">💡</span>
+          <div class="award-year">2018</div>
+          <h3>IDEA Award</h3>
+          <p data-de="Innovative. Digital. Experience. Award. – für herausragende digitale Innovationsleistung bei Gühring IT." data-en="Innovative. Digital. Experience. Award – for outstanding digital innovation at Gühring IT.">Innovative. Digital. Experience. Award. – für herausragende digitale Innovationsleistung bei Gühring IT.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-tag" data-de="// kontakt" data-en="// contact">// kontakt</div>
+        <h2 data-de="Kontakt aufnehmen" data-en="Get in Touch">Kontakt aufnehmen</h2>
+        <p data-de="Haben Sie ein spannendes Projekt? Lassen Sie uns sprechen." data-en="Have an exciting project? Let's talk.">Haben Sie ein spannendes Projekt? Lassen Sie uns sprechen.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info fade-in">
+          <h3 data-de="Direkter Kontakt" data-en="Direct Contact">Direkter Kontakt</h3>
+          <p data-de="Ich freue mich auf Ihre Anfrage und antworte in der Regel innerhalb von 24 Stunden." data-en="I look forward to your inquiry and typically respond within 24 hours.">Ich freue mich auf Ihre Anfrage und antworte in der Regel innerhalb von 24 Stunden.</p>
+          <div class="contact-items">
+            <a href="https://www.linkedin.com/in/julian-hilzinger/" target="_blank" rel="noopener" class="contact-item">
+              <div class="contact-item-icon">
+                <svg fill="currentColor" viewBox="0 0 24 24" width="18" height="18"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </div>
+              <div>
+                <div class="contact-item-label">LinkedIn</div>
+                <div class="contact-item-value">linkedin.com/in/julian-hilzinger</div>
+              </div>
+            </a>
+            <div class="contact-item" style="cursor:default;">
+              <div class="contact-item-icon">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="contact-item-label" data-de="Standort" data-en="Location">Standort</div>
+                <div class="contact-item-value">Fridingen a.d. Donau, Baden-Württemberg</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form fade-in fade-in-delay-2">
+          <h3 data-de="Nachricht senden" data-en="Send a Message">Nachricht senden</h3>
+          <form id="contact-form" onsubmit="handleFormSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname" data-de="Vorname *" data-en="First Name *">Vorname *</label>
+                <input type="text" id="fname" required data-de-placeholder="Max" data-en-placeholder="John" placeholder="Max" />
+              </div>
+              <div class="form-group">
+                <label for="lname" data-de="Nachname *" data-en="Last Name *">Nachname *</label>
+                <input type="text" id="lname" required data-de-placeholder="Mustermann" data-en-placeholder="Doe" placeholder="Mustermann" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email" data-de="E-Mail-Adresse *" data-en="Email Address *">E-Mail-Adresse *</label>
+              <input type="email" id="email" required placeholder="max@firma.de" />
+            </div>
+            <div class="form-group">
+              <label for="subject" data-de="Betreff" data-en="Subject">Betreff</label>
+              <input type="text" id="subject" data-de-placeholder="Projektanfrage" data-en-placeholder="Project Inquiry" placeholder="Projektanfrage" />
+            </div>
+            <div class="form-group">
+              <label for="message" data-de="Nachricht *" data-en="Message *">Nachricht *</label>
+              <textarea id="message" required data-de-placeholder="Beschreiben Sie Ihr Projekt oder Ihre Anfrage..." data-en-placeholder="Describe your project or inquiry...">
+              </textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              <span data-de="Nachricht senden" data-en="Send Message">Nachricht senden</span>
+            </button>
+            <p id="form-success" style="display:none; color:var(--success); text-align:center; margin-top:12px; font-size:0.9rem;" data-de="✓ Nachricht gesendet! Ich melde mich bald." data-en="✓ Message sent! I'll be in touch soon.">✓ Nachricht gesendet! Ich melde mich bald.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <span data-de="© 2026 Julian Hilzinger. Alle Rechte vorbehalten." data-en="© 2026 Julian Hilzinger. All rights reserved.">© 2026 Julian Hilzinger. Alle Rechte vorbehalten.</span>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/julian-hilzinger/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="#" onclick="openImpressum(event)" data-de="Impressum" data-en="Imprint">Impressum</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== IMPRESSUM MODAL ===================== -->
+  <div class="modal-overlay" id="impressum-modal" onclick="closeImpressumOnBg(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 data-de="Impressum" data-en="Legal Notice">Impressum</h3>
+        <button class="modal-close" onclick="closeImpressum()" aria-label="Schließen">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h4 data-de="Angaben gemäß § 5 TMG" data-en="Information according to § 5 TMG">Angaben gemäß § 5 TMG</h4>
+        <address>
+          Julian Hilzinger<br />
+          Schloss-Bronnen-Str. 9<br />
+          78567 Fridingen an der Donau<br />
+          Deutschland
+        </address>
+
+        <hr class="impressum-divider" />
+
+        <h4 data-de="Kontakt" data-en="Contact">Kontakt</h4>
+        <p>
+          <span data-de="Telefon" data-en="Phone">Telefon</span>: +49 176 24328152<br />
+          E-Mail: <a href="mailto:julian-hilzinger@web.de">julian-hilzinger@web.de</a>
+        </p>
+
+        <hr class="impressum-divider" />
+
+        <h4 data-de="Umsatzsteuer-ID" data-en="VAT ID">Umsatzsteuer-ID</h4>
+        <p data-de="Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: bitte ergänzen." data-en="VAT identification number according to § 27a UStG: please add.">Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: bitte ergänzen.</p>
+
+        <hr class="impressum-divider" />
+
+        <h4 data-de="Berufsbezeichnung und berufsrechtliche Regelungen" data-en="Professional title and regulations">Berufsbezeichnung</h4>
+        <p data-de="Freiberuflicher IT-Berater und Softwareentwickler." data-en="Freelance IT consultant and software developer.">Freiberuflicher IT-Berater und Softwareentwickler.</p>
+
+        <hr class="impressum-divider" />
+
+        <h4 data-de="Haftung für Inhalte" data-en="Liability for content">Haftung für Inhalte</h4>
+        <p data-de="Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen." data-en="As a service provider, we are responsible for our own content on these pages according to § 7 Abs. 1 TMG. According to §§ 8 to 10 TMG, we are not obligated to monitor transmitted or stored third-party information.">Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen.</p>
+
+        <hr class="impressum-divider" />
+
+        <h4 data-de="Haftung für Links" data-en="Liability for links">Haftung für Links</h4>
+        <p data-de="Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen." data-en="Our website contains links to external third-party websites, over whose content we have no control and therefore cannot accept any liability.">Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.</p>
+
+        <hr class="impressum-divider" />
+
+        <h4 data-de="Urheberrecht" data-en="Copyright">Urheberrecht</h4>
+        <p data-de="Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers." data-en="The content and works created by the site operator on these pages are subject to German copyright law. Reproduction, editing, distribution and any kind of exploitation outside the limits of copyright require written consent.">Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== JAVASCRIPT ===================== -->
+  <script>
+    // ===== LANGUAGE SYSTEM =====
+    let currentLang = 'de';
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.getElementById('lang-toggle').textContent = lang === 'de' ? 'EN' : 'DE';
+
+      document.querySelectorAll('[data-de][data-en]').forEach(el => {
+        const text = el.getAttribute('data-' + lang);
+        if (text !== null) el.innerHTML = text;
+      });
+
+      // Update placeholders
+      document.querySelectorAll('[data-de-placeholder]').forEach(el => {
+        const ph = el.getAttribute('data-' + lang + '-placeholder');
+        if (ph) el.placeholder = ph;
+      });
+
+      // Update tab buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        const text = btn.getAttribute('data-' + lang);
+        if (text) btn.innerHTML = text;
+      });
+
+      // Update skill tab labels
+      document.querySelectorAll('.nav-links a[data-de]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + lang);
+      });
+      document.querySelectorAll('.mobile-menu a[data-de]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + lang);
+      });
+    }
+
+    document.getElementById('lang-toggle').addEventListener('click', () => {
+      setLang(currentLang === 'de' ? 'en' : 'de');
+    });
+
+    // ===== NAVBAR SCROLL =====
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // ===== HAMBURGER MENU =====
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // ===== TYPING EFFECT =====
+    const phrases = {
+      de: ['Senior Software Architekt', 'KI-Stratege & AI Engineer', 'Tech Lead & Mentor', 'Cloud-Native Experte', 'Freelancer seit 2022'],
+      en: ['Senior Software Architect', 'AI Strategist & AI Engineer', 'Tech Lead & Mentor', 'Cloud-Native Expert', 'Freelancer since 2022']
+    };
+
+    let phraseIndex = 0, charIndex = 0, isDeleting = false;
+    const typedEl = document.getElementById('typed-text');
+
+    function type() {
+      const currentPhrases = phrases[currentLang];
+      const current = currentPhrases[phraseIndex % currentPhrases.length];
+      typedEl.textContent = current.substring(0, charIndex);
+      let speed = isDeleting ? 40 : 80;
+      if (!isDeleting && charIndex === current.length) {
+        speed = 2000; isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false; phraseIndex++;
+        speed = 400;
+      }
+      charIndex += isDeleting ? -1 : 1;
+      setTimeout(type, speed);
+    }
+    type();
+
+    // ===== SCROLL FADE-IN =====
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ===== STATS COUNTER =====
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.getAttribute('data-count'));
+          let count = 0;
+          const step = Math.ceil(target / 30);
+          const interval = setInterval(() => {
+            count = Math.min(count + step, target);
+            el.textContent = count;
+            if (count >= target) clearInterval(interval);
+          }, 50);
+          statsObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('[data-count]').forEach(el => statsObserver.observe(el));
+
+    // ===== SKILL TABS =====
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.skills-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // ===== HERO CANVAS ANIMATION =====
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const PARTICLE_COUNT = 70;
+
+    function resize() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.r = Math.random() * 2 + 1;
+      }
+      update() {
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(74,144,217,0.6)';
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(74,144,217,${(1 - dist / 120) * 0.3})`;
+            ctx.lineWidth = 0.8;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // ===== CONTACT FORM =====
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.style.opacity = '0.6';
+      setTimeout(() => {
+        document.getElementById('form-success').style.display = 'block';
+        document.getElementById('contact-form').reset();
+        btn.disabled = false;
+        btn.style.opacity = '1';
+      }, 800);
+    }
+
+    // ===== SMOOTH SCROLL FOR ANCHORS =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ===== IMPRESSUM MODAL =====
+    function openImpressum(e) {
+      e.preventDefault();
+      document.getElementById('impressum-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeImpressum() {
+      document.getElementById('impressum-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function closeImpressumOnBg(e) {
+      if (e.target === document.getElementById('impressum-modal')) closeImpressum();
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeImpressum(); });
+  </script>
+</body>
+</html>
