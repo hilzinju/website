@@ -1,81 +1,70 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useMotionTemplate,
+  useAnimationFrame,
+} from "framer-motion";
+
+function GridPattern({
+  patternId,
+  offsetX,
+  offsetY,
+}: {
+  patternId: string;
+  offsetX: ReturnType<typeof useMotionValue<number>>;
+  offsetY: ReturnType<typeof useMotionValue<number>>;
+}) {
+  return (
+    <svg className="w-full h-full">
+      <defs>
+        <motion.pattern
+          id={patternId}
+          width="40"
+          height="40"
+          patternUnits="userSpaceOnUse"
+          x={offsetX}
+          y={offsetY}
+        >
+          <path
+            d="M 40 0 L 0 0 0 40"
+            fill="none"
+            stroke="#8B949E"
+            strokeWidth="1"
+          />
+        </motion.pattern>
+      </defs>
+      <rect width="100%" height="100%" fill={`url(#${patternId})`} />
+    </svg>
+  );
+}
 
 export default function Hero() {
   const t = useTranslations("hero");
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [typedText, setTypedText] = useState("");
 
   const phrases: string[] = t.raw("phrases") as string[];
 
-  // Canvas particle network
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+  const mouseX = useMotionValue(-999);
+  const mouseY = useMotionValue(-999);
+  const gridOffsetX = useMotionValue(0);
+  const gridOffsetY = useMotionValue(0);
 
-    let animFrame: number;
-    const particles: { x: number; y: number; vx: number; vy: number }[] = [];
-    const COUNT = 60;
+  useAnimationFrame(() => {
+    gridOffsetX.set((gridOffsetX.get() + 0.3) % 40);
+    gridOffsetY.set((gridOffsetY.get() + 0.3) % 40);
+  });
 
-    const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    resize();
-    window.addEventListener("resize", resize);
+  const maskImage = useMotionTemplate`radial-gradient(350px circle at ${mouseX}px ${mouseY}px, black, transparent)`;
 
-    for (let i = 0; i < COUNT; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-      });
-    }
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(74,144,217,0.6)";
-        ctx.fill();
-      });
-
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(74,144,217,${0.15 * (1 - dist / 120)})`;
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-          }
-        }
-      }
-      animFrame = requestAnimationFrame(draw);
-    };
-    draw();
-
-    return () => {
-      cancelAnimationFrame(animFrame);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const { left, top } = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - left);
+    mouseY.set(e.clientY - top);
+  };
 
   // Typewriter effect
   useEffect(() => {
@@ -114,23 +103,35 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center pt-[70px] overflow-hidden">
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full opacity-40 pointer-events-none"
-      />
+    <section
+      className="relative min-h-screen w-full flex items-center pt-[70px] overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Base grid layer */}
+      <div className="absolute inset-0 z-0 opacity-[0.07]">
+        <GridPattern patternId="grid-base" offsetX={gridOffsetX} offsetY={gridOffsetY} />
+      </div>
+      {/* Mouse-reveal grid layer */}
+      <motion.div
+        className="absolute inset-0 z-0 opacity-50"
+        style={{ maskImage, WebkitMaskImage: maskImage }}
+      >
+        <GridPattern patternId="grid-reveal" offsetX={gridOffsetX} offsetY={gridOffsetY} />
+      </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full py-20">
+      <div className="relative z-10 w-full px-6 md:px-12 lg:px-20 py-20">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-3xl"
+          className="max-w-4xl"
         >
           <motion.div variants={itemVariants}>
             <h1 className="text-4xl md:text-6xl font-extrabold text-text-primary leading-tight mb-4">
-              <span className="text-accent">{typedText}</span>
-              <span className="animate-pulse text-accent">|</span>
+              <span className="whitespace-nowrap">
+                <span className="text-accent">{typedText}</span>
+                <span className="animate-pulse text-accent">|</span>
+              </span>
             </h1>
           </motion.div>
 
