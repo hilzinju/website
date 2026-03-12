@@ -48,8 +48,8 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen w-full flex items-center pt-[70px] overflow-hidden">
-      {/* Ambient glow blobs */}
-      <div className="absolute inset-0 pointer-events-none z-0">
+      {/* Ambient glow blobs — hidden on mobile to avoid GPU blur cost */}
+      <div className="hidden md:block absolute inset-0 pointer-events-none z-0">
         <div className="absolute right-[-10%] top-[-15%] w-[50%] h-[50%] rounded-full bg-accent/10 blur-[140px]" />
         <div className="absolute left-[-15%] bottom-[-10%] w-[45%] h-[45%] rounded-full bg-blue-600/10 blur-[160px]" />
       </div>
