@@ -1,0 +1,243 @@
+{
+  "nav": {
+    "about": "Über mich",
+    "services": "Leistungen",
+    "skills": "Skills",
+    "experience": "Erfahrung",
+    "projects": "Projekte",
+    "education": "Ausbildung",
+    "awards": "Auszeichnungen",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "phrases": ["Senior Software Architekt", "KI-Stratege & AI Engineer", "Tech Lead & Mentor", "Cloud-Native Experte", "Freelancer seit 2022"],
+    "subtitle": "Spezialist für Legacy-Modularisierung und KI-Agenten-Workflows",
+    "quote": "Hervorragend bei der Umsetzung komplexer Anforderungen.",
+    "quoteAuthor": "— Referenz Kunde",
+    "ctaContact": "Kontakt aufnehmen"
+  },
+  "about": {
+    "tag": "// über mich",
+    "title": "Julian Hilzinger",
+    "bio1": "Mit über 10 Jahren Erfahrung in der Softwareentwicklung und -architektur bin ich spezialisiert auf die Modernisierung komplexer Legacy-Systeme, den Aufbau cloud-nativer Microservice-Architekturen und die strategische Integration von KI-Agenten in bestehende Workflows.",
+    "bio2": "Als Freelancer seit 2022 unterstütze ich Unternehmen dabei, technische Exzellenz mit strategischem Denken zu verbinden – von der initialen Architekturkonzeption bis zur produktiven Umsetzung inkl. CI/CD, Mentoring und technischer Leitung.",
+    "locationLabel": "Standort",
+    "locationValue": "Fridingen a.d. Donau, Baden-Württemberg",
+    "languagesLabel": "Sprachen",
+    "languagesValue": "Deutsch (Muttersprache), Englisch",
+    "statusLabel": "Status",
+    "statusValue": "Freelancer (seit 01/2022)",
+    "stat1Value": "10+",
+    "stat1Label": "Jahre Erfahrung",
+    "stat2Value": "3",
+    "stat2Label": "Auszeichnungen",
+    "stat3Value": "6",
+    "stat3Label": "Fachgebiete",
+    "stat4Value": "20+",
+    "stat4Label": "Zertifikate"
+  },
+  "services": {
+    "tag": "// leistungen",
+    "title": "Meine Dienstleistungen",
+    "subtitle": "Von der Architekturkonzeption bis zur KI-Integration – maßgeschneiderte Lösungen für Ihr Unternehmen.",
+    "items": [
+      {
+        "title": "Software-Architektur & Engineering",
+        "desc": "Konzeption skalierbarer Backend-Systeme, Microservices und verteilter Softwarearchitekturen. Clean Code, Datenmodellierung und wartbare Systemdesigns."
+      },
+      {
+        "title": "KI-Transformation & Innovation",
+        "desc": "Aufbau und Integration von KI-Agenten und Agentic Workflows (MCP, N8N), LLM-Integration, RAG-Architekturen, Machine Learning und angewandte KI-Forschung."
+      },
+      {
+        "title": "Full-Stack Solutions",
+        "desc": "End-to-End Entwicklung von Webanwendungen und mobilen Apps (iOS & Android). Plattformübergreifendes UI/UX Design mit modernen Frameworks wie Angular 17+."
+      },
+      {
+        "title": "Digitale Strategie & Consulting",
+        "desc": "Strategische Beratung zur digitalen Transformation, Konzeption innovativer Geschäftsmodelle, Rapid Prototyping und technische Due-Diligence."
+      },
+      {
+        "title": "Immersive Technologien",
+        "desc": "Entwicklung von Augmented Reality (Microsoft HoloLens) und Virtual Reality Anwendungen für Schulung, Produktpräsentation, Fernwartung und Kundenpräsentation."
+      },
+      {
+        "title": "Agile Methoden & Tech Lead",
+        "desc": "Professionelles Projektmanagement nach Scrum, technische Projektleitung, Mentoring von Entwicklerteams sowie Code-Reviews und Architektur-Workshops."
+      }
+    ]
+  },
+  "skills": {
+    "tag": "// technologien",
+    "title": "Tech Stack & Kompetenzen",
+    "subtitle": "Ein breites Spektrum moderner Technologien – von Backend-Engineering bis KI-Entwicklung.",
+    "tabs": {
+      "engineering": "Software Engineering",
+      "architecture": "Architektur & Cloud",
+      "ai": "KI & AI Engineering",
+      "devops": "DevOps & QA"
+    }
+  },
+  "experience": {
+    "tag": "// karriere",
+    "title": "Beruflicher Werdegang",
+    "subtitle": "Von der Hochschule bis zum Senior Freelancer – ein Weg geprägt von Innovation und technischem Wachstum.",
+    "present": "heute",
+    "items": [
+      {
+        "period": "01/2022 – heute",
+        "role": "Senior Software Architekt & AI Engineer",
+        "company": "Freelancer | Selbstständig",
+        "desc": "Software-Architektur & AI-Engineering, Cloud-Native Solutions, Technical Lead, Digitale Transformationsstrategie, Industrie 4.0 & Rapid Prototyping für nationale und internationale Auftraggeber aus Industrie und öffentlichem Sektor.",
+        "active": true
+      },
+      {
+        "period": "10/2021 – 10/2022",
+        "role": "Lehrbeauftragter",
+        "company": "Hochschule Albstadt-Sigmaringen",
+        "desc": "Modul Mobile Systeme und Cloud – Lehre zu iOS, Android, Azure Cloud, Digitalisierung, Softwarearchitektur und Mobile Systeme.",
+        "active": false
+      },
+      {
+        "period": "07/2018 – 11/2021",
+        "role": "Head of IT Innovations",
+        "company": "Gühring KG",
+        "desc": "App-Entwicklung (Apple, Android, Web), Full Stack, AR/VR (HoloLens), Machine Learning, Prototyping neuer IT-Technologien, Erarbeitung innovativer Geschäftsmodelle, Projektleitung, IT-Messeauftritt (EMO, AMB, METAV).",
+        "active": false
+      },
+      {
+        "period": "08/2016 – 06/2018",
+        "role": "Software Developer & Architect",
+        "company": "Gühring KG",
+        "desc": "App-Entwicklung (Apple, Android, Web), Full Stack, AR/VR, Cognitive Services, Künstliche Intelligenz. Technische Projektleitung für ein Großprojekt (> 800 Manntage).",
+        "active": false
+      },
+      {
+        "period": "06/2015 – 02/2016",
+        "role": "Wissenschaftlicher Mitarbeiter",
+        "company": "Hochschule Albstadt-Sigmaringen",
+        "desc": "Entwicklung eines Editors für Ontologien basierend auf der Programmiersprache Java.",
+        "active": false
+      }
+    ]
+  },
+  "projects": {
+    "tag": "// projekte",
+    "title": "Ausgewählte Projekte",
+    "subtitle": "Ein Auszug aus abgeschlossenen und laufenden Freelance-Projekten.",
+    "present": "heute",
+    "items": [
+      {
+        "period": "03/2023 – heute",
+        "active": true,
+        "title": "Herdenmanagement-Plattform",
+        "client": "Agrar-Tech Unternehmen",
+        "desc": "Modularisierung einer bestehenden Monolith-Architektur in eigenständige, containerisierte Microservices (Java 21/25, Spring Boot 3). Implementierung von MCP Server & Agents zur Prozessautomatisierung, CI/CD-Pipelines, Angular 17+ Frontend-Weiterentwicklung.",
+        "tags": ["Java 21/25", "Spring Boot 3", "Angular 17+", "Docker", "Kubernetes", "MCP", "RabbitMQ", "Azure"]
+      },
+      {
+        "period": "02/2022 – 12/2022",
+        "active": false,
+        "title": "Digitale Fördergelder-Plattform",
+        "client": "Öffentlicher Auftraggeber",
+        "desc": "Digitale Plattform zur Pflege und Analyse bundesweiter Fördergelder. Microservices-Architektur mit Webanwendung, Django Admin-Backend, Spring Boot Komponenten und MySQL-Datenbank. Projektleitung und Softwarearchitektur.",
+        "tags": ["Microservices", "Spring Boot", "Angular", "Django", "Python", "Docker", "Linux"]
+      },
+      {
+        "period": "2018",
+        "active": false,
+        "title": "FC Bayern Hackdays – Telekom Challenge",
+        "client": "1. Platz | 1.300+ Bewerber",
+        "desc": "Prototyp-Entwicklung einer AR-Applikation für die Microsoft HoloLens zur Erweiterung des Fußballerlebnisses im und um das TV-Gerät. Teamleitung und Entwicklung innerhalb von 48 Stunden.",
+        "tags": ["Microsoft HoloLens", "C# / Unity", "Java", "Spring Boot", "AR"]
+      }
+    ]
+  },
+  "education": {
+    "tag": "// ausbildung",
+    "title": "Ausbildung & Zertifikate",
+    "subtitle": "Solides akademisches Fundament ergänzt durch kontinuierliche Weiterbildung und internationale Zertifizierungen.",
+    "degreesTitle": "Hochschule & Weiterbildung",
+    "certsTitle": "Zertifizierungen",
+    "degrees": [
+      { "year": "04/2021 – 05/2022", "title": "ThePowerMBA", "sub": "Business Strategy, Entrepreneurship, Marketing, Innovation & Digital Transformation" },
+      { "year": "03/2015 – 09/2016", "title": "M.Sc. Business Analytics", "sub": "Hochschule Albstadt-Sigmaringen" },
+      { "year": "09/2011 – 03/2015", "title": "B.Sc. Wirtschaftsinformatik", "sub": "Hochschule Albstadt-Sigmaringen" },
+      { "year": "Weiterbildung", "title": "Cambridge Judge Business School", "sub": "Digital Disruption: Digital Transformation Strategies" },
+      { "year": "Weiterbildung", "title": "UC Berkeley – School of Business", "sub": "Data Strategy: Leveraging Data as a Competitive Advantage" },
+      { "year": "Weiterbildung", "title": "acatech", "sub": "Technologie, Strategie und Leadership" }
+    ],
+    "certs": [
+      { "year": "Anthropic Certified", "title": "Claude Code in Action", "sub": "Model Context Protocol: Advanced Topics · Building with the Claude API", "highlight": true },
+      { "year": "Microsoft Certified", "title": "Azure Fundamentals", "sub": "Azure AI Fundamentals · Azure Data Fundamentals", "highlight": false },
+      { "year": "Scrum.org", "title": "Professional Scrum Master", "sub": "Certificate of Completion", "highlight": false },
+      { "year": "AI Training Institute", "title": "KI Kompetenz Schulung", "sub": "EU AI ACT – Compliance & Anwendung", "highlight": false }
+    ]
+  },
+  "awards": {
+    "tag": "// auszeichnungen",
+    "title": "Auszeichnungen",
+    "subtitle": "Anerkennungen für herausragende Leistungen in Wissenschaft, Innovation und Technologie.",
+    "items": [
+      {
+        "year": "2016",
+        "title": "Philipp-Matthäus-Hahn Preis",
+        "desc": "Bester Absolvent des M.Sc. Business Analytics, verliehen von der Philipp-Matthäus-Hahn-Stiftung."
+      },
+      {
+        "year": "2018",
+        "title": "1. Platz FC Bayern Hackdays",
+        "desc": "Gewinner der Telekom Challenge mit AR/VR-Projekt. Programmierwettbewerb mit mehr als 1.300 Bewerbern."
+      },
+      {
+        "year": "2018",
+        "title": "IDEA Award",
+        "desc": "Innovative. Digital. Experience. Award – für herausragende digitale Innovationsleistung bei Gühring IT."
+      }
+    ]
+  },
+  "contact": {
+    "tag": "// kontakt",
+    "title": "Kontakt aufnehmen",
+    "subtitle": "Haben Sie ein spannendes Projekt? Lassen Sie uns sprechen.",
+    "directTitle": "Direkter Kontakt",
+    "directDesc": "Ich freue mich auf Ihre Anfrage und antworte in der Regel innerhalb von 24 Stunden.",
+    "locationLabel": "Standort",
+    "locationValue": "Fridingen a.d. Donau, Baden-Württemberg",
+    "formTitle": "Nachricht senden",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail-Adresse",
+    "subject": "Betreff",
+    "message": "Nachricht",
+    "send": "Nachricht senden",
+    "success": "Nachricht gesendet! Ich melde mich bald.",
+    "firstNamePlaceholder": "Max",
+    "lastNamePlaceholder": "Mustermann",
+    "subjectPlaceholder": "Projektanfrage",
+    "messagePlaceholder": "Beschreiben Sie Ihr Projekt oder Ihre Anfrage..."
+  },
+  "footer": {
+    "copyright": "© 2026 Julian Hilzinger. Alle Rechte vorbehalten.",
+    "impressum": "Impressum"
+  },
+  "impressum": {
+    "title": "Impressum",
+    "section1Title": "Angaben gemäß § 5 TMG",
+    "address": "Julian Hilzinger\nSchloss-Bronnen-Str. 9\n78567 Fridingen an der Donau\nDeutschland",
+    "section2Title": "Kontakt",
+    "phone": "Telefon",
+    "phoneValue": "+49 176 24328152",
+    "emailValue": "julian-hilzinger@web.de",
+    "section3Title": "Umsatzsteuer-ID",
+    "vatText": "Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: bitte ergänzen.",
+    "section4Title": "Berufsbezeichnung",
+    "profText": "Freiberuflicher IT-Berater und Softwareentwickler.",
+    "section5Title": "Haftung für Inhalte",
+    "liabilityText": "Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen.",
+    "section6Title": "Haftung für Links",
+    "linksText": "Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.",
+    "section7Title": "Urheberrecht",
+    "copyrightText": "Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors."
+  }
+}

@@ -1,0 +1,243 @@
+{
+  "nav": {
+    "about": "About",
+    "services": "Services",
+    "skills": "Skills",
+    "experience": "Experience",
+    "projects": "Projects",
+    "education": "Education",
+    "awards": "Awards",
+    "contact": "Contact"
+  },
+  "hero": {
+    "phrases": ["Senior Software Architect", "AI Strategist & AI Engineer", "Tech Lead & Mentor", "Cloud-Native Expert", "Freelancer since 2022"],
+    "subtitle": "Specialist in Legacy Modularization and AI Agent Workflows",
+    "quote": "\"Outstanding in implementing complex requirements.\"",
+    "quoteAuthor": "— Client Reference",
+    "ctaContact": "Get in Touch"
+  },
+  "about": {
+    "tag": "// about",
+    "title": "Julian Hilzinger",
+    "bio1": "With over 10 years of experience in software development and architecture, I specialize in modernizing complex legacy systems, building cloud-native microservice architectures, and strategically integrating AI agents into existing workflows.",
+    "bio2": "As a freelancer since 2022, I help companies connect technical excellence with strategic thinking – from initial architecture design to production deployment including CI/CD, mentoring, and technical leadership.",
+    "locationLabel": "Location",
+    "locationValue": "Fridingen a.d. Donau, Baden-Württemberg",
+    "languagesLabel": "Languages",
+    "languagesValue": "German (native), English",
+    "statusLabel": "Status",
+    "statusValue": "Freelancer (since 01/2022)",
+    "stat1Value": "10+",
+    "stat1Label": "Years Experience",
+    "stat2Value": "3",
+    "stat2Label": "Awards",
+    "stat3Value": "6",
+    "stat3Label": "Expertise Areas",
+    "stat4Value": "20+",
+    "stat4Label": "Certifications"
+  },
+  "services": {
+    "tag": "// services",
+    "title": "My Services",
+    "subtitle": "From architecture design to AI integration – tailored solutions for your business.",
+    "items": [
+      {
+        "title": "Software Architecture & Engineering",
+        "desc": "Design of scalable backend systems, microservices, and distributed software architectures. Clean code, data modeling, and maintainable system designs."
+      },
+      {
+        "title": "AI Transformation & Innovation",
+        "desc": "Building and integrating AI agents and agentic workflows (MCP, N8N), LLM integration, RAG architectures, machine learning, and applied AI research."
+      },
+      {
+        "title": "Full-Stack Solutions",
+        "desc": "End-to-end development of web applications and mobile apps (iOS & Android). Cross-platform UI/UX design with modern frameworks like Angular 17+."
+      },
+      {
+        "title": "Digital Strategy & Consulting",
+        "desc": "Strategic consulting for digital transformation, design of innovative business models, rapid prototyping, and technical due diligence."
+      },
+      {
+        "title": "Immersive Technologies",
+        "desc": "Development of Augmented Reality (Microsoft HoloLens) and Virtual Reality applications for training, product presentation, remote maintenance, and client demos."
+      },
+      {
+        "title": "Agile Methods & Tech Lead",
+        "desc": "Professional project management with Scrum, technical project leadership, developer team mentoring, code reviews, and architecture workshops."
+      }
+    ]
+  },
+  "skills": {
+    "tag": "// technologies",
+    "title": "Tech Stack & Expertise",
+    "subtitle": "A broad spectrum of modern technologies – from backend engineering to AI development.",
+    "tabs": {
+      "engineering": "Software Engineering",
+      "architecture": "Architecture & Cloud",
+      "ai": "AI & AI Engineering",
+      "devops": "DevOps & QA"
+    }
+  },
+  "experience": {
+    "tag": "// career",
+    "title": "Professional Experience",
+    "subtitle": "From university to senior freelancer – a path shaped by innovation and technical growth.",
+    "present": "present",
+    "items": [
+      {
+        "period": "01/2022 – present",
+        "role": "Senior Software Architect & AI Engineer",
+        "company": "Freelancer | Self-employed",
+        "desc": "Software architecture & AI engineering, cloud-native solutions, technical leadership, digital transformation strategy, Industry 4.0 & rapid prototyping for national and international clients across industry and the public sector.",
+        "active": true
+      },
+      {
+        "period": "10/2021 – 10/2022",
+        "role": "Lecturer",
+        "company": "Hochschule Albstadt-Sigmaringen",
+        "desc": "Module \"Mobile Systems and Cloud\" – teaching iOS, Android, Azure Cloud, digitalization, software architecture, and mobile systems.",
+        "active": false
+      },
+      {
+        "period": "07/2018 – 11/2021",
+        "role": "Head of IT Innovations",
+        "company": "Gühring KG",
+        "desc": "App development (Apple, Android, Web), full stack, AR/VR (HoloLens), machine learning, prototyping new IT technologies, developing innovative business models, project management, IT trade fair appearances (EMO, AMB, METAV).",
+        "active": false
+      },
+      {
+        "period": "08/2016 – 06/2018",
+        "role": "Software Developer & Architect",
+        "company": "Gühring KG",
+        "desc": "App development (Apple, Android, Web), full stack, AR/VR, cognitive services, artificial intelligence. Technical project lead for a large-scale project (> 800 man-days).",
+        "active": false
+      },
+      {
+        "period": "06/2015 – 02/2016",
+        "role": "Research Associate",
+        "company": "Hochschule Albstadt-Sigmaringen",
+        "desc": "Development of an ontology editor based on the Java programming language.",
+        "active": false
+      }
+    ]
+  },
+  "projects": {
+    "tag": "// projects",
+    "title": "Selected Projects",
+    "subtitle": "A selection of completed and ongoing freelance projects.",
+    "present": "present",
+    "items": [
+      {
+        "period": "03/2023 – present",
+        "active": true,
+        "title": "Herd Management Platform",
+        "client": "AgriTech Company",
+        "desc": "Modularization of an existing monolithic architecture into independent, containerized microservices (Java 21/25, Spring Boot 3). Implementation of MCP server & agents for process automation, CI/CD pipelines, Angular 17+ frontend development.",
+        "tags": ["Java 21/25", "Spring Boot 3", "Angular 17+", "Docker", "Kubernetes", "MCP", "RabbitMQ", "Azure"]
+      },
+      {
+        "period": "02/2022 – 12/2022",
+        "active": false,
+        "title": "Digital Funding Platform",
+        "client": "Public Sector Client",
+        "desc": "Digital platform for managing and analyzing nationwide funding. Microservices architecture with web application, Django admin backend, Spring Boot components, and MySQL database. Project management and software architecture.",
+        "tags": ["Microservices", "Spring Boot", "Angular", "Django", "Python", "Docker", "Linux"]
+      },
+      {
+        "period": "2018",
+        "active": false,
+        "title": "FC Bayern Hackdays – Telekom Challenge",
+        "client": "1st Place | 1,300+ Applicants",
+        "desc": "Prototype development of an AR application for Microsoft HoloLens to enhance the football experience around the TV. Team leadership and development within 48 hours.",
+        "tags": ["Microsoft HoloLens", "C# / Unity", "Java", "Spring Boot", "AR"]
+      }
+    ]
+  },
+  "education": {
+    "tag": "// education",
+    "title": "Education & Certifications",
+    "subtitle": "A solid academic foundation complemented by continuous education and international certifications.",
+    "degreesTitle": "Degrees & Education",
+    "certsTitle": "Certifications",
+    "degrees": [
+      { "year": "04/2021 – 05/2022", "title": "ThePowerMBA", "sub": "Business Strategy, Entrepreneurship, Marketing, Innovation & Digital Transformation" },
+      { "year": "03/2015 – 09/2016", "title": "M.Sc. Business Analytics", "sub": "Hochschule Albstadt-Sigmaringen" },
+      { "year": "09/2011 – 03/2015", "title": "B.Sc. Wirtschaftsinformatik", "sub": "Hochschule Albstadt-Sigmaringen" },
+      { "year": "Further Education", "title": "Cambridge Judge Business School", "sub": "Digital Disruption: Digital Transformation Strategies" },
+      { "year": "Further Education", "title": "UC Berkeley – School of Business", "sub": "Data Strategy: Leveraging Data as a Competitive Advantage" },
+      { "year": "Further Education", "title": "acatech", "sub": "Technology, Strategy and Leadership" }
+    ],
+    "certs": [
+      { "year": "Anthropic Certified", "title": "Claude Code in Action", "sub": "Model Context Protocol: Advanced Topics · Building with the Claude API", "highlight": true },
+      { "year": "Microsoft Certified", "title": "Azure Fundamentals", "sub": "Azure AI Fundamentals · Azure Data Fundamentals", "highlight": false },
+      { "year": "Scrum.org", "title": "Professional Scrum Master", "sub": "Certificate of Completion", "highlight": false },
+      { "year": "AI Training Institute", "title": "AI Competence Training", "sub": "EU AI ACT – Compliance & Application", "highlight": false }
+    ]
+  },
+  "awards": {
+    "tag": "// awards",
+    "title": "Awards",
+    "subtitle": "Recognition for outstanding achievements in academia, innovation, and technology.",
+    "items": [
+      {
+        "year": "2016",
+        "title": "Philipp-Matthäus-Hahn Award",
+        "desc": "Best graduate of the M.Sc. Business Analytics program, awarded by the Philipp-Matthäus-Hahn Foundation."
+      },
+      {
+        "year": "2018",
+        "title": "1st Place FC Bayern Hackdays",
+        "desc": "Winner of the Telekom Challenge with AR/VR project. Programming competition with more than 1,300 applicants."
+      },
+      {
+        "year": "2018",
+        "title": "IDEA Award",
+        "desc": "Innovative. Digital. Experience. Award – for outstanding digital innovation at Gühring IT."
+      }
+    ]
+  },
+  "contact": {
+    "tag": "// contact",
+    "title": "Get in Touch",
+    "subtitle": "Have an exciting project? Let's talk.",
+    "directTitle": "Direct Contact",
+    "directDesc": "I look forward to your inquiry and typically respond within 24 hours.",
+    "locationLabel": "Location",
+    "locationValue": "Fridingen a.d. Donau, Baden-Württemberg",
+    "formTitle": "Send a Message",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email Address",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send Message",
+    "success": "Message sent! I'll be in touch soon.",
+    "firstNamePlaceholder": "John",
+    "lastNamePlaceholder": "Doe",
+    "subjectPlaceholder": "Project Inquiry",
+    "messagePlaceholder": "Describe your project or inquiry..."
+  },
+  "footer": {
+    "copyright": "© 2026 Julian Hilzinger. All rights reserved.",
+    "impressum": "Imprint"
+  },
+  "impressum": {
+    "title": "Legal Notice",
+    "section1Title": "Information according to § 5 TMG",
+    "address": "Julian Hilzinger\nSchloss-Bronnen-Str. 9\n78567 Fridingen an der Donau\nGermany",
+    "section2Title": "Contact",
+    "phone": "Phone",
+    "phoneValue": "+49 176 24328152",
+    "emailValue": "julian-hilzinger@web.de",
+    "section3Title": "VAT ID",
+    "vatText": "VAT identification number according to § 27a UStG: please add.",
+    "section4Title": "Professional Title",
+    "profText": "Freelance IT consultant and software developer.",
+    "section5Title": "Liability for Content",
+    "liabilityText": "As a service provider, we are responsible for our own content on these pages according to § 7 Abs. 1 TMG. According to §§ 8 to 10 TMG, we are not obligated to monitor transmitted or stored third-party information.",
+    "section6Title": "Liability for Links",
+    "linksText": "Our website contains links to external third-party websites, over whose content we have no control and therefore cannot accept any liability.",
+    "section7Title": "Copyright",
+    "copyrightText": "The content and works created by the site operator on these pages are subject to German copyright law. Reproduction, editing, distribution and any kind of exploitation outside the limits of copyright require written consent."
+  }
+}
