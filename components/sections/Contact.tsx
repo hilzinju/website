@@ -38,21 +38,26 @@ export default function Contact() {
     setLoading(true);
     setSubmitError("");
 
-    const formData = new FormData(form);
-    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+    try {
+      const formData = new FormData(form);
+      formData.append("access_key", WEB3FORMS_ACCESS_KEY);
 
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formData,
-    });
-    const result = await response.json();
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+      const result = await response.json();
 
-    setLoading(false);
-    if (result.success) {
-      setSubmitted(true);
-      form.reset();
-    } else {
-      setSubmitError(result.message || "Fehler beim Senden. Bitte versuche es erneut.");
+      if (result.success) {
+        setSubmitted(true);
+        form.reset();
+      } else {
+        setSubmitError(result.message || "Fehler beim Senden. Bitte versuche es erneut.");
+      }
+    } catch {
+      setSubmitError("Fehler beim Senden. Bitte versuche es erneut.");
+    } finally {
+      setLoading(false);
     }
   };
 

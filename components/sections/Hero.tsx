@@ -62,35 +62,40 @@ export default function Hero() {
         >
           {/* Giant typewriter */}
           <motion.div variants={itemVariants} className="mb-5">
-            <div className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold leading-none tracking-tighter">
-              <span className="whitespace-nowrap">
-                <span
-                  style={{
-                    background: "linear-gradient(135deg, #4A90D9 0%, #7BC0FF 60%, #5BA3EC 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                    filter: "drop-shadow(0 0 48px rgba(74,144,217,0.35))",
-                  }}
-                >
-                  {typedText || "\u00A0"}
-                </span>
-                <span
-                  style={{
-                    color: "#4A90D9",
-                    filter: "drop-shadow(0 0 10px rgba(74,144,217,0.9))",
-                    animation: "pulse 1s ease-in-out infinite",
-                  }}
-                >
-                  |
-                </span>
+            <div
+              className="font-extrabold leading-none tracking-tighter"
+              style={{ fontSize: "clamp(2rem, 8vw, 7rem)" }}
+            >
+              <span
+                style={{
+                  background: "linear-gradient(135deg, #4A90D9 0%, #7BC0FF 60%, #5BA3EC 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                  filter: "drop-shadow(0 0 48px rgba(74,144,217,0.35))",
+                }}
+              >
+                {typedText || "\u00A0"}
+              </span>
+              <span
+                style={{
+                  color: "#4A90D9",
+                  WebkitTextFillColor: "#4A90D9",
+                  filter: "drop-shadow(0 0 10px rgba(74,144,217,0.9))",
+                  animation: "pulse 1s ease-in-out infinite",
+                }}
+              >
+                |
               </span>
             </div>
           </motion.div>
 
           {/* Name */}
           <motion.div variants={itemVariants} className="mb-8">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary tracking-tight">
+            <h1
+              className="font-bold text-text-primary tracking-tight"
+              style={{ fontSize: "clamp(1.5rem, 4vw, 3rem)" }}
+            >
               Julian Hilzinger
             </h1>
           </motion.div>
