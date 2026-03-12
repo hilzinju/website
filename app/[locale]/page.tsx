@@ -13,12 +13,14 @@ import Projects from "@/components/sections/Projects";
 import Education from "@/components/sections/Education";
 import Awards from "@/components/sections/Awards";
 import Contact from "@/components/sections/Contact";
+import InfiniteGridBackground from "@/components/ui/infinite-grid-background";
 
 export default function HomePage() {
   const [impressumOpen, setImpressumOpen] = useState(false);
 
   return (
     <>
+      <InfiniteGridBackground />
       <Navbar />
       <main>
         <Hero />

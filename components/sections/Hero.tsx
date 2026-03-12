@@ -2,69 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import {
-  motion,
-  useMotionValue,
-  useMotionTemplate,
-  useAnimationFrame,
-} from "framer-motion";
-
-function GridPattern({
-  patternId,
-  offsetX,
-  offsetY,
-}: {
-  patternId: string;
-  offsetX: ReturnType<typeof useMotionValue<number>>;
-  offsetY: ReturnType<typeof useMotionValue<number>>;
-}) {
-  return (
-    <svg className="w-full h-full">
-      <defs>
-        <motion.pattern
-          id={patternId}
-          width="40"
-          height="40"
-          patternUnits="userSpaceOnUse"
-          x={offsetX}
-          y={offsetY}
-        >
-          <path
-            d="M 40 0 L 0 0 0 40"
-            fill="none"
-            stroke="#8B949E"
-            strokeWidth="1"
-          />
-        </motion.pattern>
-      </defs>
-      <rect width="100%" height="100%" fill={`url(#${patternId})`} />
-    </svg>
-  );
-}
+import { motion } from "framer-motion";
 
 export default function Hero() {
   const t = useTranslations("hero");
   const [typedText, setTypedText] = useState("");
 
   const phrases: string[] = t.raw("phrases") as string[];
-
-  const mouseX = useMotionValue(-999);
-  const mouseY = useMotionValue(-999);
-  const gridOffsetX = useMotionValue(0);
-  const gridOffsetY = useMotionValue(0);
-
-  useAnimationFrame(() => {
-    gridOffsetX.set((gridOffsetX.get() + 0.3) % 40);
-    gridOffsetY.set((gridOffsetY.get() + 0.3) % 40);
-  });
-
-  const maskImage = useMotionTemplate`radial-gradient(350px circle at ${mouseX}px ${mouseY}px, black, transparent)`;
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const { left, top } = e.currentTarget.getBoundingClientRect();
-    mouseX.set(e.clientX - left);
-    mouseY.set(e.clientY - top);
-  };
 
   // Typewriter effect
   useEffect(() => {
@@ -103,22 +47,7 @@ export default function Hero() {
   };
 
   return (
-    <section
-      className="relative min-h-screen w-full flex items-center pt-[70px] overflow-hidden"
-      onMouseMove={handleMouseMove}
-    >
-      {/* Base grid layer */}
-      <div className="absolute inset-0 z-0 opacity-[0.07]">
-        <GridPattern patternId="grid-base" offsetX={gridOffsetX} offsetY={gridOffsetY} />
-      </div>
-      {/* Mouse-reveal grid layer */}
-      <motion.div
-        className="absolute inset-0 z-0 opacity-50"
-        style={{ maskImage, WebkitMaskImage: maskImage }}
-      >
-        <GridPattern patternId="grid-reveal" offsetX={gridOffsetX} offsetY={gridOffsetY} />
-      </motion.div>
-
+    <section className="relative min-h-screen w-full flex items-center pt-[70px] overflow-hidden">
       <div className="relative z-10 w-full px-6 md:px-12 lg:px-20 py-20">
         <motion.div
           variants={containerVariants}
