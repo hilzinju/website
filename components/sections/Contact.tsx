@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 
 // Get your free key at https://web3forms.com — enter julian-hilzinger@web.de and replace this value
 const WEB3FORMS_ACCESS_KEY = "ecabc33a-fd67-4630-a0c0-cd2cdae887ac";
+
+const COOLDOWN_SECONDS = 60;
 
 export default function Contact() {
   const t = useTranslations("contact");
@@ -13,6 +15,27 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [cooldown, setCooldown] = useState(0);
+  const cooldownRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (cooldownRef.current) clearInterval(cooldownRef.current);
+    };
+  }, []);
+
+  const startCooldown = () => {
+    setCooldown(COOLDOWN_SECONDS);
+    cooldownRef.current = setInterval(() => {
+      setCooldown((prev) => {
+        if (prev <= 1) {
+          clearInterval(cooldownRef.current!);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
 
   const validate = (data: FormData) => {
     const errs: Record<string, string> = {};
@@ -50,7 +73,10 @@ export default function Contact() {
 
       if (result.success) {
         setSubmitted(true);
+        setSubmitError("");
         form.reset();
+        startCooldown();
+        setTimeout(() => setSubmitted(false), COOLDOWN_SECONDS * 1000);
       } else {
         setSubmitError(result.message || "Fehler beim Senden. Bitte versuche es erneut.");
       }
@@ -133,6 +159,8 @@ export default function Contact() {
           >
             <h3 className="text-text-primary font-semibold text-lg mb-5">{t("formTitle")}</h3>
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
+              {/* Honeypot — filled by bots, rejected by Web3Forms */}
+              <input type="checkbox" name="botcheck" aria-hidden="true" tabIndex={-1} style={{ display: "none" }} />
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-text-muted text-xs font-medium mb-1.5">
@@ -200,7 +228,7 @@ export default function Contact() {
 
               <button
                 type="submit"
-                disabled={loading || submitted}
+                disabled={loading || cooldown > 0}
                 className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-accent hover:bg-accent-light text-white font-semibold rounded-xl transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {loading ? (
@@ -211,6 +239,8 @@ export default function Contact() {
                     </svg>
                     Senden…
                   </>
+                ) : cooldown > 0 ? (
+                  `Bitte warte ${cooldown}s…`
                 ) : (
                   <>
                     <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
