@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 
 // Get your free key at https://web3forms.com — enter julian-hilzinger@web.de and replace this value
-const WEB3FORMS_ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+const WEB3FORMS_ACCESS_KEY = "ecabc33a-fd67-4630-a0c0-cd2cdae887ac";
 
 export default function Contact() {
   const t = useTranslations("contact");
