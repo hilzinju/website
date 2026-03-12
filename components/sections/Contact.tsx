@@ -4,9 +4,14 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 
+// Get your free key at https://web3forms.com — enter julian-hilzinger@web.de and replace this value
+const WEB3FORMS_ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+
 export default function Contact() {
   const t = useTranslations("contact");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const validate = (data: FormData) => {
@@ -20,7 +25,7 @@ export default function Contact() {
     return errs;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
@@ -30,8 +35,34 @@ export default function Contact() {
       return;
     }
     setErrors({});
-    setSubmitted(true);
-    form.reset();
+    setLoading(true);
+    setSubmitError("");
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: `${data.get("fname")} ${data.get("lname")}`,
+          email: data.get("email"),
+          subject: data.get("subject") || "Neue Kontaktanfrage – julian-hilzinger.de",
+          message: data.get("message"),
+          from_name: "Website Kontaktformular",
+        }),
+      });
+      const result = await res.json();
+      if (result.success) {
+        setSubmitted(true);
+        form.reset();
+      } else {
+        setSubmitError(result.message || "Fehler beim Senden. Bitte versuche es erneut.");
+      }
+    } catch {
+      setSubmitError("Netzwerkfehler. Bitte versuche es erneut.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputClass = (field: string) =>
@@ -173,14 +204,37 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-accent hover:bg-accent-light text-white font-semibold rounded-xl transition-colors duration-200"
+                disabled={loading || submitted}
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-accent hover:bg-accent-light text-white font-semibold rounded-xl transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <line x1="22" y1="2" x2="11" y2="13"/>
-                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                </svg>
-                {t("send")}
+                {loading ? (
+                  <>
+                    <svg className="animate-spin" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <circle cx="12" cy="12" r="10" strokeOpacity="0.25"/>
+                      <path d="M22 12a10 10 0 01-10 10" strokeOpacity="1"/>
+                    </svg>
+                    Senden…
+                  </>
+                ) : (
+                  <>
+                    <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <line x1="22" y1="2" x2="11" y2="13"/>
+                      <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                    {t("send")}
+                  </>
+                )}
               </button>
+
+              {submitError && (
+                <motion.p
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-red-400 text-sm text-center"
+                >
+                  {submitError}
+                </motion.p>
+              )}
 
               {submitted && (
                 <motion.p
