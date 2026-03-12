@@ -39,17 +39,18 @@ export default function Contact() {
     setSubmitError("");
 
     try {
+      // Use FormData (no Content-Type header) to avoid CORS preflight
+      const body = new FormData();
+      body.append("access_key", WEB3FORMS_ACCESS_KEY);
+      body.append("name", `${data.get("fname") as string} ${data.get("lname") as string}`);
+      body.append("email", data.get("email") as string);
+      body.append("subject", (data.get("subject") as string) || "Neue Kontaktanfrage – julian-hilzinger.de");
+      body.append("message", data.get("message") as string);
+      body.append("from_name", "Website Kontaktformular");
+
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_ACCESS_KEY,
-          name: `${data.get("fname")} ${data.get("lname")}`,
-          email: data.get("email"),
-          subject: data.get("subject") || "Neue Kontaktanfrage – julian-hilzinger.de",
-          message: data.get("message"),
-          from_name: "Website Kontaktformular",
-        }),
+        body,
       });
       const result = await res.json();
       if (result.success) {
@@ -58,7 +59,8 @@ export default function Contact() {
       } else {
         setSubmitError(result.message || "Fehler beim Senden. Bitte versuche es erneut.");
       }
-    } catch {
+    } catch (err) {
+      console.error("Contact form error:", err);
       setSubmitError("Netzwerkfehler. Bitte versuche es erneut.");
     } finally {
       setLoading(false);
